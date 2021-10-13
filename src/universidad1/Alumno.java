@@ -16,6 +16,7 @@ public class Alumno {
     String fechaNac;
     int legajo;
     boolean activo;
+    
 
     public Alumno(int id_alumno, String apellido, String nombre, String fechaNac, int legajo, boolean activo) {
         this.id_alumno = id_alumno;
