@@ -42,8 +42,7 @@ public class MateriaData {
                 if(rs.next())
                     m.setId_materia(rs.getInt(1));
                     JOptionPane.showInternalMessageDialog(null, "Materia Guardada");
-                   
-                    
+  
                     ps.close();
                             
                 
