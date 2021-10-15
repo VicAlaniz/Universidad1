@@ -6,12 +6,12 @@
 package data_universidad;
 
 import com.mysql.jdbc.Statement;
-import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import universidad1.Conectar;
 import universidad1.Materia;
@@ -33,9 +33,9 @@ public class MateriaData {
         
             try { 
                 PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-                ps.setNString(1, m.nombreMateria);
-                ps.setInt(2, m.anio);
-                ps.setBoolean(3, m.activo);
+                ps.setString(1, m.getNombreMateria());
+                ps.setInt(2, m.getAnio());
+                ps.setBoolean(3, m.isActivo());
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 
