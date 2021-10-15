@@ -23,7 +23,7 @@ import universidad1.Materia;
 public class MateriaData {
      private Connection conn = null;
     
-    public MateriaData(Conectar conexionMateria) throws SQLException{
+    public MateriaData(Conectar conexionMateria){
         this.conn = conexionMateria.getConexion();
     }
     

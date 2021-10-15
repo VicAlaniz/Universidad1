@@ -7,7 +7,6 @@ package universidad1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -36,9 +35,4 @@ public class Conectar {
         
         return conn;
     }
-
-    public PreparedStatement prepareStatement(String query, int RETURN_GENERATED_KEYS) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

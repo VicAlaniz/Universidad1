@@ -2,6 +2,7 @@
 package data_universidad;
 
 import com.mysql.jdbc.Statement;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +14,13 @@ import universidad1.Alumno;
 import universidad1.Conectar;
 
 public class AlumnoData {
-    private Conectar conn = null;
+    private Connection conn = null;
+
 
     public AlumnoData(Conectar conexion){
-        this.conn = (Conectar) conexion.getConexion();
+        this.conn = (Connection) conexion.getConexion();
+    
+        
     }
     
     public void guardarAlumno(Alumno alum){

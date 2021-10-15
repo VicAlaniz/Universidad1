@@ -11,22 +11,22 @@ package universidad1;
  */
 public class Cursada {
     private int id_cursada;
-    private Materia id_materia;
-    private Alumno id_alumno;
+    private Materia materia;
+    private Alumno alumno;
     private double nota;
     private boolean activo;
 
-    public Cursada(int id_cursada, Materia id_materia, Alumno id_alumno, double nota, boolean activo) {
+    public Cursada(int id_cursada, Materia materia, Alumno alumno, double nota, boolean activo) {
         this.id_cursada = id_cursada;
-        this.id_materia = id_materia;
-        this.id_alumno = id_alumno;
+        this.materia = materia;
+        this.alumno = alumno;
         this.nota = nota;
         this.activo = activo;
     }
 
-    public Cursada(Materia id_materia, Alumno id_alumno, double nota, boolean activo) {
-        this.id_materia = id_materia;
-        this.id_alumno = id_alumno;
+    public Cursada(Materia materia, Alumno alumno, double nota, boolean activo) {
+        this.materia = materia;
+        this.alumno = alumno;
         this.nota = nota;
         this.activo = activo;
     }
@@ -43,20 +43,20 @@ public class Cursada {
         this.id_cursada = id_cursada;
     }
 
-    public Materia getId_materia() {
-        return id_materia;
+    public Materia getMateria() {
+        return materia;
     }
 
-    public void setId_materia(Materia id_materia) {
-        this.id_materia = id_materia;
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
-    public Alumno getId_alumno() {
-        return id_alumno;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setId_alumno(Alumno id_alumno) {
-        this.id_alumno = id_alumno;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public double getNota() {
