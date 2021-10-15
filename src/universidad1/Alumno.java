@@ -27,6 +27,18 @@ public class Alumno {
         this.activo = activo;
     }
 
+    public Alumno(String apellido, String nombre, String fechaNac, int legajo, boolean activo) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fechaNac = fechaNac;
+        this.legajo = legajo;
+        this.activo = activo;
+    }
+    
+    public Alumno(){
+        
+    }
+
     public int getId_alumno() {
         return id_alumno;
     }
@@ -73,6 +85,11 @@ public class Alumno {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Alumno{" + "id_alumno=" + id_alumno + ", apellido=" + apellido + ", nombre=" + nombre + ", legajo=" + legajo + ", activo=" + activo + '}';
     }
     
     

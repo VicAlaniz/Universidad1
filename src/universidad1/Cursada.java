@@ -10,18 +10,29 @@ package universidad1;
  * @author Administrador
  */
 public class Cursada {
-    int id_cursada;
-    Materia id_materia;
-    Alumno id_alumno;
-    double nota;
-    boolean activa;
+    private int id_cursada;
+    private Materia id_materia;
+    private Alumno id_alumno;
+    private double nota;
+    private boolean activo;
 
-    public Cursada(int id_cursada, Materia id_materia, Alumno id_alumno, double nota, boolean activa) {
+    public Cursada(int id_cursada, Materia id_materia, Alumno id_alumno, double nota, boolean activo) {
         this.id_cursada = id_cursada;
         this.id_materia = id_materia;
         this.id_alumno = id_alumno;
         this.nota = nota;
-        this.activa = activa;
+        this.activo = activo;
+    }
+
+    public Cursada(Materia id_materia, Alumno id_alumno, double nota, boolean activo) {
+        this.id_materia = id_materia;
+        this.id_alumno = id_alumno;
+        this.nota = nota;
+        this.activo = activo;
+    }
+    
+    public Cursada(){
+        
     }
 
     public int getId_cursada() {
@@ -56,12 +67,12 @@ public class Cursada {
         this.nota = nota;
     }
 
-    public boolean isActiva() {
-        return activa;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setActiva(boolean activa) {
-        this.activa = activa;
+    public void setActiva(boolean activo) {
+        this.activo = activo;
     }
     
     
