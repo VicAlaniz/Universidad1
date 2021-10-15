@@ -59,6 +59,11 @@ public class VistaUniversidad extends javax.swing.JFrame {
         jMenu.add(jmAlumnos);
 
         jmMaterias.setText("Materias");
+        jmMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmMateriasActionPerformed(evt);
+            }
+        });
         jMenu.add(jmMaterias);
 
         jmInscripcion.setText("Inscripción");
@@ -93,6 +98,15 @@ public class VistaUniversidad extends javax.swing.JFrame {
         var.setVisible(true);
         jEsc.add(var);
     }//GEN-LAST:event_jmAlumnosActionPerformed
+
+    private void jmMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmMateriasActionPerformed
+        // TODO add your handling code here:
+        jEsc.removeAll();
+        jEsc.repaint();
+        VistaMaterias var = new VistaMaterias();
+        var.setVisible(true);
+        jEsc.add(var);
+    }//GEN-LAST:event_jmMateriasActionPerformed
 
     /**
      * @param args the command line arguments
