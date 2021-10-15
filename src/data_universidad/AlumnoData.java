@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidad1.Alumno;
 import universidad1.Conectar;
@@ -18,11 +16,7 @@ public class AlumnoData {
     private Conectar conn = null;
 
     public AlumnoData(Conectar conexion){
-        try {
-            this.conn = (Conectar) conexion.getConexion();
-        } catch (SQLException ex) {
-            Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.conn = (Conectar) conexion.getConexion();
     }
     
     public void guardarAlumno(Alumno alum){
