@@ -56,8 +56,8 @@
                                           </Group>
                                           <Component id="jlFechaNac" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Component id="jtFechaNac" max="32767" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jdFechaNac" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jbGuardar" min="-2" max="-2" attributes="0"/>
@@ -106,9 +106,9 @@
                   <Component id="jtApellido" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlFechaNac" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtFechaNac" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jlFechaNac" min="-2" max="-2" attributes="0"/>
+                  <Component id="jdFechaNac" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -120,7 +120,7 @@
                   <Component id="jlActivo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcActivo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -204,9 +204,9 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jcActivo">
     </Component>
-    <Component class="javax.swing.JTextField" name="jtFechaNac">
-    </Component>
     <Component class="javax.swing.JTextField" name="jtLegajo">
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jdFechaNac">
     </Component>
   </SubComponents>
 </Form>
