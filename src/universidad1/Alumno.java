@@ -5,6 +5,8 @@
  */
 package universidad1;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Administrador
@@ -13,12 +15,12 @@ public class Alumno {
     int id_alumno;
     String apellido;
     String nombre;
-    String fechaNac;
+    LocalDate fechaNac;
     int legajo;
     boolean activo;
     
 
-    public Alumno(int id_alumno, String apellido, String nombre, String fechaNac, int legajo, boolean activo) {
+    public Alumno(int id_alumno, String apellido, String nombre, LocalDate fechaNac, int legajo, boolean activo) {
         this.id_alumno = id_alumno;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -27,7 +29,7 @@ public class Alumno {
         this.activo = activo;
     }
 
-    public Alumno(String apellido, String nombre, String fechaNac, int legajo, boolean activo) {
+    public Alumno(String apellido, String nombre, LocalDate fechaNac, int legajo, boolean activo) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.fechaNac = fechaNac;
@@ -63,11 +65,11 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public String getFechaNac() {
+    public LocalDate getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(String fechaNac) {
+    public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
 

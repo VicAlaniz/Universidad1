@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package universidad1;
+package data_universidad;
 
 import com.mysql.jdbc.Statement;
 import java.awt.List;
@@ -12,9 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import universidad1.Conectar;
+import universidad1.Materia;
 
 /**
  *
@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 public class MateriaData {
      private Connection conn = null;
     
-    public MateriaData(Conectar conexionMateria){
+    public MateriaData(Conectar conexionMateria) throws SQLException{
         this.conn = conexionMateria.getConexion();
     }
     
@@ -79,12 +79,13 @@ public class MateriaData {
         return m;
     }
         
-        
+    /**
+     *
+     * @return
+     */
     public List<Materia> listarMaterias(){
-        
-        Materia m = null;
-        
         ArrayList<Materia> listaMaterias = new ArrayList<>();
+        
         String query = "SELECT * FROM materia WHERE activo = true";
         
          try { 
@@ -92,7 +93,7 @@ public class MateriaData {
                 ResultSet rs = ps.executeQuery();
                 
                 while(rs.next()){
-                    m = new Materia();
+                    Materia m = new Materia();
                     
                     m.setId_materia(rs.getInt("id_materia"));
                     m.setNombreMateria(rs.getString("nombre"));
@@ -105,16 +106,54 @@ public class MateriaData {
                             
                 
             } catch (SQLException ex) {
-                 JOptionPane.showInternalMessageDialog(null, "Error, al obtener la materia");
+                 JOptionPane.showInternalMessageDialog(null, "Error al obtener materia");
             }
         return listaMaterias;
     }
     
     public void actualizarMateria(Materia m){
+        String query = "UPDATE materia SET nombreMaterias = ?, anio = ?, activo = ?, WHERE id_materia = ?";
+        
+         try {
+             PreparedStatement ps = conn.prepareStatement(query);
+             
+             ps.setInt(4, m.getId_materia());
+             ps.setString(1, m.getNombreMateria());
+             ps.setInt(2, m.getAnio());
+             ps.setBoolean(3, m.isActivo());
+             
+             if (ps.executeUpdate()>0){
+               JOptionPane.showInternalMessageDialog(null, "Materia actualizada correctamente");  
+             }
+             else {
+                 JOptionPane.showInternalMessageDialog(null, "Materia no cargada en el registro");
+             }
+             ps.close();
+             
+         } catch (SQLException ex) {
+             JOptionPane.showInternalMessageDialog(null, "Error al actualizar materia");
+         }
         
     }
     
-    public void borrarMateria(int id){
+    public void borrarMateria(int id_materia){
+        String query = "UPDATE materia SET activo = false WHERE id_materia = ?";
+        
+         try {
+             PreparedStatement ps = conn.prepareStatement(query);
+             ps.setInt(1, id_materia);
+             if (ps.executeUpdate()>0){
+               JOptionPane.showInternalMessageDialog(null, "Materia borrada correctamente");  
+             }
+             else {
+                 JOptionPane.showInternalMessageDialog(null, "No se realizaron cambios");
+             }
+             ps.close();
+             
+         } catch (SQLException ex) {
+             
+             JOptionPane.showInternalMessageDialog(null, "Error al borrar");
+         }
         
     }
 }
