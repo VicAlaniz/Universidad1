@@ -18,13 +18,11 @@ public class AlumnoData {
 
 
     public AlumnoData(Conectar conexion){
-        this.conn = (Connection) conexion.getConexion();
-    
-        
+        this.conn = (Connection) conexion.getConexion();    
     }
     
     public void guardarAlumno(Alumno alum){
-        String query = "INSERT INTO alumno(apellido, nombre, fechaNac, legajo, activo)VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO alumnos(apellido, nombre, fechaNac, legajo, activo)VALUES (?,?,?,?,?)";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -50,7 +48,7 @@ public class AlumnoData {
     public List<Alumno> listaDeAlumnos(){
         ArrayList<Alumno> listaDeAlumnos = new ArrayList<>();
         
-        String query = "SELECT * FROM alumno WHERE activo = true";
+        String query = "SELECT * FROM alumnos WHERE activo = true";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, 0);
@@ -77,7 +75,7 @@ public class AlumnoData {
     public Alumno buscarAlumno(int idAlumno){
         Alumno alum = null;
         
-        String query = "SELECT * FROM alumno WHERE idAlumno = ? AND activo = true";
+        String query = "SELECT * FROM alumnos WHERE id_alumno = ? AND activo = true";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, idAlumno);
@@ -101,7 +99,7 @@ public class AlumnoData {
     }
     
     public void borrarAlumno(int idAlumno){
-        String query = "UPDATE alumno SET activo = false WHERE id_alumno = ?";
+        String query = "UPDATE alumnos SET activo = false WHERE id_alumno = ?";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, idAlumno);
@@ -118,7 +116,7 @@ public class AlumnoData {
     }
     
     public void actualizarAlumno(Alumno alum){
-        String query = "UPDATE alumno SET apellido = ?, nombre = ?, fechaNac = ?, legajo = ?,  WHERE id_alumno = ?";
+        String query = "UPDATE alumnos SET apellido = ?, nombre = ?, fechaNac = ?, legajo = ?,  WHERE id_alumno = ?";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, 0);

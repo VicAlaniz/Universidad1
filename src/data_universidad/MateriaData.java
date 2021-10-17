@@ -24,36 +24,37 @@ public class MateriaData {
      private Connection conn = null;
     
     public MateriaData(Conectar conexionMateria){
-        this.conn = conexionMateria.getConexion();
+        this.conn = (Connection) conexionMateria.getConexion();
     }
     
     public void guardarMateria(Materia m){
-        String query = "INSERT INTO materia(nombreMateria, anio, activo) VALUES(?, ?, ?)";
-        
+        String query = "INSERT INTO materias(nombreMateria, anio, activo) VALUES(?, ?, ?)";
         
             try { 
                 PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, m.getNombreMateria());
                 ps.setInt(2, m.getAnio());
                 ps.setBoolean(3, m.isActivo());
+                
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 
-                if(rs.next())
-                    m.setId_materia(rs.getInt(1));
-                    JOptionPane.showInternalMessageDialog(null, "Materia Guardada");
-  
-                    ps.close();
-                            
-                
-            } catch (SQLException ex) {
-                JOptionPane.showInternalMessageDialog(null, "Error, no se pudo guardar la materia");
+                ps.executeUpdate();
+            ResultSet rst = ps.getGeneratedKeys();
+            
+            if(rst.next()){
+                m.setId_materia(rst.getInt(1));
+                JOptionPane.showMessageDialog(null, "Materia Guardada Correctamente");
             }
+            ps.close();
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nMateria No Guardado");
+        }
     }
     
     public Materia buscarMateria(int id_materia){
         Materia m = null;
-        String query = "SELECT * FROM materia WHERE id_materia = ? AND activo = true";
+        String query = "SELECT * FROM materias WHERE id_materia = ? AND activo = true";
         
         try { 
                 PreparedStatement ps = conn.prepareStatement(query);
@@ -85,7 +86,7 @@ public class MateriaData {
     public List<Materia> listarMaterias(){
         ArrayList<Materia> listaMaterias = new ArrayList<>();
         
-        String query = "SELECT * FROM materia WHERE activo = true";
+        String query = "SELECT * FROM materias WHERE activo = true";
         
          try { 
                 PreparedStatement ps = conn.prepareStatement(query);
@@ -111,7 +112,7 @@ public class MateriaData {
     }
     
     public void actualizarMateria(Materia m){
-        String query = "UPDATE materia SET nombreMaterias = ?, anio = ?, activo = ?, WHERE id_materia = ?";
+        String query = "UPDATE materias SET nombreMateria = ?, anio = ?, activo = ?, WHERE id_materia = ?";
         
          try {
              PreparedStatement ps = conn.prepareStatement(query);
@@ -132,11 +133,10 @@ public class MateriaData {
          } catch (SQLException ex) {
              JOptionPane.showInternalMessageDialog(null, "Error al actualizar materia");
          }
-        
     }
     
     public void borrarMateria(int id_materia){
-        String query = "UPDATE materia SET activo = false WHERE id_materia = ?";
+        String query = "UPDATE materias SET activo = false WHERE id_materia = ?";
         
          try {
              PreparedStatement ps = conn.prepareStatement(query);
@@ -150,9 +150,7 @@ public class MateriaData {
              ps.close();
              
          } catch (SQLException ex) {
-             
              JOptionPane.showInternalMessageDialog(null, "Error al borrar");
          }
-        
     }
 }
