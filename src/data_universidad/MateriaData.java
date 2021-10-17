@@ -37,9 +37,6 @@ public class MateriaData {
                 ps.setBoolean(3, m.isActivo());
                 
                 ps.executeUpdate();
-                ResultSet rs = ps.getGeneratedKeys();
-                
-                ps.executeUpdate();
             ResultSet rst = ps.getGeneratedKeys();
             
             if(rst.next()){

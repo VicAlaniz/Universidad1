@@ -24,7 +24,7 @@ public class Universidad1 {
         AlumnoData ad = new AlumnoData(conexion);
         MateriaData md = new MateriaData(conexion);
         
-        /*Alumno v = new Alumno("Alaniz", "Vivky", LocalDate.of(1985, 10, 11), 001, true);
+        Alumno v = new Alumno("Alaniz", "Vivky", LocalDate.of(1985, 10, 11), 001, true);
         Alumno p = new Alumno("Baigorria", "Pato", LocalDate.of(1978, 12 ,01), 002, true);
         Alumno r = new Alumno("Alaniz", "Rama", LocalDate.of(1982,04,25), 003, true);
         
@@ -42,7 +42,7 @@ public class Universidad1 {
         md.guardarMateria(i);
         md.guardarMateria(w);
 
-        System.out.println("Materia guardada correctamente");*/
+        System.out.println("Materia guardada correctamente");
 
     }
     
