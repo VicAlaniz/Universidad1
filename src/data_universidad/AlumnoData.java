@@ -72,14 +72,14 @@ public class AlumnoData {
         return listaDeAlumnos;
     }
     
-    public Alumno buscarAlumno(int idAlumno){
+    public Alumno buscarAlumno(int id_alumno){
         Alumno alum = null;
         
         String query = "SELECT * FROM alumnos WHERE id_alumno = ? AND activo = true";
         
         try{
-            PreparedStatement ps = conn.prepareStatement(query, idAlumno);
-            ps.setInt(1, idAlumno);
+            PreparedStatement ps = conn.prepareStatement(query, id_alumno);
+            ps.setInt(1, id_alumno);
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){
@@ -98,12 +98,12 @@ public class AlumnoData {
         return alum;
     }
     
-    public void borrarAlumno(int idAlumno){
+    public void borrarAlumno(int id_alumno){
         String query = "UPDATE alumnos SET activo = false WHERE id_alumno = ?";
         
         try{
-            PreparedStatement ps = conn.prepareStatement(query, idAlumno);
-            ps.setInt(1, idAlumno);
+            PreparedStatement ps = conn.prepareStatement(query, id_alumno);
+            ps.setInt(1, id_alumno);
             if(ps.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null, "Alumno Borrado Exitosamente");
             }else{
@@ -116,7 +116,7 @@ public class AlumnoData {
     }
     
     public void actualizarAlumno(Alumno alum){
-        String query = "UPDATE alumnos SET apellido = ?, nombre = ?, fechaNac = ?, legajo = ?,  WHERE id_alumno = ?";
+        String query = "UPDATE alumnos SET apellido = ?, nombre = ?, fechaNac = ?, legajo = ?, activo = ?  WHERE id_alumno = ?";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, 0);

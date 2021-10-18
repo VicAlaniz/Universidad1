@@ -54,7 +54,7 @@ public class MateriaData {
         String query = "SELECT * FROM materias WHERE id_materia = ? AND activo = true";
         
         try { 
-                PreparedStatement ps = conn.prepareStatement(query);
+                PreparedStatement ps = conn.prepareStatement(query, id_materia);
                 ps.setInt(1, id_materia);
                 ResultSet rs = ps.executeQuery();
                 
@@ -64,14 +64,11 @@ public class MateriaData {
                     m.setId_materia(rs.getInt("id_materia"));
                     m.setNombreMateria(rs.getString("nombre"));
                     m.setAnio(rs.getInt("anio"));
-                    m.setActivo(rs.getBoolean("activo"));
-                    
+                    m.setActivo(rs.getBoolean("activo"));                   
                 }
-                    ps.close();
-                            
-                
+                    ps.close();    
             } catch (SQLException ex) {
-                 JOptionPane.showInternalMessageDialog(null, "Error, no se pudo guardar la materia");
+                 JOptionPane.showMessageDialog(null, "Error, no se pudo guardar la materia");
             }
         return m;
     }
@@ -86,7 +83,7 @@ public class MateriaData {
         String query = "SELECT * FROM materias WHERE activo = true";
         
          try { 
-                PreparedStatement ps = conn.prepareStatement(query);
+                PreparedStatement ps = conn.prepareStatement(query, 0);
                 ResultSet rs = ps.executeQuery();
                 
                 while(rs.next()){
@@ -103,7 +100,7 @@ public class MateriaData {
                             
                 
             } catch (SQLException ex) {
-                 JOptionPane.showInternalMessageDialog(null, "Error al obtener materia");
+                 JOptionPane.showMessageDialog(null, "Error al obtener materia");
             }
         return listaMaterias;
     }
@@ -112,7 +109,7 @@ public class MateriaData {
         String query = "UPDATE materias SET nombreMateria = ?, anio = ?, activo = ?, WHERE id_materia = ?";
         
          try {
-             PreparedStatement ps = conn.prepareStatement(query);
+             PreparedStatement ps = conn.prepareStatement(query, 0);
              
              ps.setInt(4, m.getId_materia());
              ps.setString(1, m.getNombreMateria());
@@ -120,15 +117,15 @@ public class MateriaData {
              ps.setBoolean(3, m.isActivo());
              
              if (ps.executeUpdate()>0){
-               JOptionPane.showInternalMessageDialog(null, "Materia actualizada correctamente");  
+               JOptionPane.showMessageDialog(null, "Materia actualizada correctamente");  
              }
              else {
-                 JOptionPane.showInternalMessageDialog(null, "Materia no cargada en el registro");
+                 JOptionPane.showMessageDialog(null, "Materia no cargada en el registro");
              }
              ps.close();
              
          } catch (SQLException ex) {
-             JOptionPane.showInternalMessageDialog(null, "Error al actualizar materia");
+             JOptionPane.showMessageDialog(null, "Error al actualizar materia");
          }
     }
     
@@ -136,18 +133,18 @@ public class MateriaData {
         String query = "UPDATE materias SET activo = false WHERE id_materia = ?";
         
          try {
-             PreparedStatement ps = conn.prepareStatement(query);
+             PreparedStatement ps = conn.prepareStatement(query, id_materia);
              ps.setInt(1, id_materia);
              if (ps.executeUpdate()>0){
-               JOptionPane.showInternalMessageDialog(null, "Materia borrada correctamente");  
+               JOptionPane.showMessageDialog(null, "Materia borrada correctamente");  
              }
              else {
-                 JOptionPane.showInternalMessageDialog(null, "No se realizaron cambios");
+                 JOptionPane.showMessageDialog(null, "No se realizaron cambios");
              }
              ps.close();
              
          } catch (SQLException ex) {
-             JOptionPane.showInternalMessageDialog(null, "Error al borrar");
+             JOptionPane.showMessageDialog(null, "Error al borrar");
          }
     }
 }

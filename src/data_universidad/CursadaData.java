@@ -184,7 +184,40 @@ public class CursadaData {
     
     }
     
-    //public List<Alumno> obtenerAlumnosXMateria(id_materia) {
+    public List<Alumno> obtenerAlumnosXMateria(int id_materia) {
+        ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
+        
+        try {
+            String query = "SELECT *"
+                    + "FROM materias"
+                    + "WHERE id_materia NOT IN (SELECT materias.id_materia"
+                    + "FROM materias, cursada"
+                    + "WHERE materias.id_materia = cursada.id_materia"
+                    + "AND cursada.activo = true"
+                    + "AND cursada.id_alumno = ?)";
+
+            PreparedStatement ps = conn.prepareStatement(query, 0);
+            ps.setInt(1, id_materia);
+            ResultSet rst = ps.executeQuery();
+            
+            while(rst.next()){
+                Alumno alum = new Alumno();
+                alum.setId_alumno(rst.getInt(1));
+                alum.setApellido(rst.getString(2));
+                alum.setNombre(rst.getString(3));
+                alum.setFechaNac(rst.getDate(4).toLocalDate());
+                alum.setLegajo(rst.getInt(5));
+                alum.setActivo(rst.getBoolean(6));
+                
+                listaAlumnosXMateria.add(alum);
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nAlumnos No Encontrados");   
+        }
+        return listaAlumnosXMateria;
+    }
+    
         
    // public void actualizarNotas(id_alumno, id_materia, nota) {
         

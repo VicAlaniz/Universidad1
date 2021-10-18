@@ -6,8 +6,8 @@
 package universidad1;
 
 import data_universidad.AlumnoData;
+import data_universidad.CursadaData;
 import data_universidad.MateriaData;
-import java.time.LocalDate;
 
 /**
  *
@@ -23,8 +23,9 @@ public class Universidad1 {
         Conectar conexion = new Conectar();
         AlumnoData ad = new AlumnoData(conexion);
         MateriaData md = new MateriaData(conexion);
+        CursadaData cd = new CursadaData(conexion);
         
-        Alumno v = new Alumno("Alaniz", "Vivky", LocalDate.of(1985, 10, 11), 001, true);
+        /*Alumno v = new Alumno("Alaniz", "Vivky", LocalDate.of(1985, 10, 11), 001, true);
         Alumno p = new Alumno("Baigorria", "Pato", LocalDate.of(1978, 12 ,01), 002, true);
         Alumno r = new Alumno("Alaniz", "Rama", LocalDate.of(1982,04,25), 003, true);
         
@@ -43,6 +44,20 @@ public class Universidad1 {
         md.guardarMateria(w);
 
         System.out.println("Materia guardada correctamente");
+        
+        md.borrarMateria(1);
+        Alumno r = new Alumno(3, "Alaniz", "Rama", LocalDate.of(1982,04,25), 003, false);
+        r.setActivo(true);
+        ad.actualizarAlumno(r);*/
+        
+        Alumno v = ad.buscarAlumno(1);
+        Materia i = md.buscarMateria(2);
+        
+        Cursada cr = new Cursada(i, v, 10, true);
+        
+        cd.guardarCursada(cr);
+        
+        System.out.println("Inscripcion realizada");
 
     }
     
