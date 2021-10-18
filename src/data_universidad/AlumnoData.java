@@ -55,6 +55,7 @@ public class AlumnoData {
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){
+                
                 Alumno alum = new Alumno();
                 alum.setId_alumno(rst.getInt(1));
                 alum.setApellido(rst.getString(2));

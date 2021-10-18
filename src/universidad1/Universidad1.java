@@ -8,6 +8,7 @@ package universidad1;
 import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
+import java.time.LocalDate;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Universidad1 {
         MateriaData md = new MateriaData(conexion);
         CursadaData cd = new CursadaData(conexion);
         
+        
         /*Alumno v = new Alumno("Alaniz", "Vivky", LocalDate.of(1985, 10, 11), 001, true);
         Alumno p = new Alumno("Baigorria", "Pato", LocalDate.of(1978, 12 ,01), 002, true);
         Alumno r = new Alumno("Alaniz", "Rama", LocalDate.of(1982,04,25), 003, true);
@@ -32,6 +34,7 @@ public class Universidad1 {
         Materia m = new Materia ("Matemáticas", 1, true);
         Materia i = new Materia ("Ingles", 1, true);
         Materia w = new Materia ("Web", 1, true);
+        
         
         ad.guardarAlumno(v);
         ad.guardarAlumno(p);
@@ -50,14 +53,21 @@ public class Universidad1 {
         r.setActivo(true);
         ad.actualizarAlumno(r);*/
         
-        Alumno v = ad.buscarAlumno(1);
-        Materia i = md.buscarMateria(2);
+        //Alumno v = ad.buscarAlumno(1);
+        //Materia i = md.buscarMateria(16);
         
-        Cursada cr = new Cursada(i, v, 10, true);
+        //Cursada cr = new Cursada(i, v, 10, true);
+ 
+        //cd.guardarCursada(cr);
         
-        cd.guardarCursada(cr);
+        //System.out.println("Inscripcion realizada");
         
-        System.out.println("Inscripcion realizada");
+        //cd.actualizarNotas(16, 1, 8.5);
+        
+        //System.out.println("Nota");
+        
+        cd.obtenerAlumnosXMateria(16);
+        System.out.println("Lista" + cd.obtenerAlumnosXMateria(16));
 
     }
     

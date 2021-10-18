@@ -34,8 +34,7 @@ public class CursadaData {
     }
     public void guardarCursada(Cursada c){
         String query = "INSERT INTO cursada(id_materia, id_alumno, nota, activo) VALUES (?, ?, ?, ?)";
-       
-        
+    
         try {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getMateria().getId_materia());
@@ -69,14 +68,14 @@ public class CursadaData {
             ps.setInt(2, id_alumno);
             
             if (ps.executeUpdate()>0){
-               JOptionPane.showInternalMessageDialog(null, "Inscripcion borrada");  
+               JOptionPane.showMessageDialog(null, "Inscripcion borrada");  
              }
              else {
-                 JOptionPane.showInternalMessageDialog(null, "Error al borrar inscripción");
+                 JOptionPane.showMessageDialog(null, "Error al borrar inscripción");
              }
              ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showInternalMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error");
         }
        
         
@@ -87,9 +86,7 @@ public class CursadaData {
 
         try {
             String query = "SELECT * FROM cursada WHERE activo = true";
-
             PreparedStatement ps = conn.prepareStatement(query);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -107,7 +104,7 @@ public class CursadaData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showInternalMessageDialog(null, "Error al crear la lista");
+            JOptionPane.showMessageDialog(null, "Error al crear la lista");
         }
         return listaCursadas;
     }
@@ -188,26 +185,26 @@ public class CursadaData {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
         
         try {
-            String query = "SELECT *"
-                    + "FROM materias"
-                    + "WHERE id_materia NOT IN (SELECT materias.id_materia"
-                    + "FROM materias, cursada"
+            String query = "SELECT cursada.id_alumno"
+                    + "FROM materias, cursada, alumnos"
                     + "WHERE materias.id_materia = cursada.id_materia"
+                    + "AND alumnos.id_alumno = cursada.id_alumno"
                     + "AND cursada.activo = true"
-                    + "AND cursada.id_alumno = ?)";
+                    + "AND cursada.id_materia = ?";
 
             PreparedStatement ps = conn.prepareStatement(query, 0);
             ps.setInt(1, id_materia);
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){
+                
                 Alumno alum = new Alumno();
-                alum.setId_alumno(rst.getInt(1));
-                alum.setApellido(rst.getString(2));
-                alum.setNombre(rst.getString(3));
-                alum.setFechaNac(rst.getDate(4).toLocalDate());
-                alum.setLegajo(rst.getInt(5));
-                alum.setActivo(rst.getBoolean(6));
+                alum.setId_alumno(rst.getInt("id_alumno"));
+                alum.setApellido(rst.getString("apellido"));
+                alum.setNombre(rst.getString("nombre"));
+                alum.setFechaNac(rst.getDate("fechaNac").toLocalDate());
+                alum.setLegajo(rst.getInt("legajo"));
+                alum.setActivo(rst.getBoolean("activo"));
                 
                 listaAlumnosXMateria.add(alum);
             }
@@ -219,7 +216,24 @@ public class CursadaData {
     }
     
         
-   // public void actualizarNotas(id_alumno, id_materia, nota) {
+   public void actualizarNotas(int id_materia, int id_alumno, double nota){
+        String query = "UPDATE cursada SET nota = ? WHERE cursada.id_materia = ? AND cursada.id_alumno = ?";
         
-    //}
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(2, id_materia);
+            ps.setInt(3, id_alumno);
+            ps.setDouble(1, nota);
+            
+            if (ps.executeUpdate()>0){
+               JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  
+             }
+             else {
+                 JOptionPane.showMessageDialog(null, "Error al cargar la nota");
+             }
+             ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+       }
 }
