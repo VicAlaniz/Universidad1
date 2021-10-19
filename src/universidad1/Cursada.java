@@ -74,6 +74,11 @@ public class Cursada {
     public void setActiva(boolean activo) {
         this.activo = activo;
     }
+
+    @Override
+    public String toString() {
+        return "Cursada{" + "id_cursada=" + id_cursada + ", materia=" + materia + ", alumno=" + alumno + ", nota=" + nota + ", activo=" + activo + '}';
+    }
     
     
     

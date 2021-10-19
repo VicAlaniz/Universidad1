@@ -8,7 +8,6 @@ package universidad1;
 import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
-import java.time.LocalDate;
 
 /**
  *
@@ -53,21 +52,34 @@ public class Universidad1 {
         r.setActivo(true);
         ad.actualizarAlumno(r);*/
         
-        //Alumno v = ad.buscarAlumno(1);
-        //Materia i = md.buscarMateria(16);
+       Alumno p = ad.buscarAlumno(2);
+       Alumno r = ad.buscarAlumno(3);
+       Materia i = md.buscarMateria(3);
         
         //Cursada cr = new Cursada(i, v, 10, true);
- 
+        Cursada cr = new Cursada(i, p, 10, true);
+        Cursada c = new Cursada(i, r, 10, true);
+        
+        cd.guardarCursada(c);
+        cd.guardarCursada(cr);
         //cd.guardarCursada(cr);
         
         //System.out.println("Inscripcion realizada");
         
-        //cd.actualizarNotas(16, 1, 8.5);
-        
-        //System.out.println("Nota");
-        
-        cd.obtenerAlumnosXMateria(16);
-        System.out.println("Lista" + cd.obtenerAlumnosXMateria(16));
+        //cd.actualizarNotas(2, 1, 8.5);
+        //ad.listaDeAlumnos();
+        //md.listarMaterias();
+        //cd.obtenerInscripcion();
+        //cd.obtenerMateriasCursadas(1);
+        //cd.obtenerMateriasNoCursadas(1);
+        //System.out.println("Lista: " + cd.obtenerMateriasNoCursadas(1));
+        //cd.borrarCursada(1, 2);
+        //cd.obtenerAlumnosXMateria(2);
+       //System.out.println("Borrado");
+       
+       //ad.buscarAlumno(1);
+       //md.buscarMateria(1);
+        //System.out.println("Materia");
 
     }
     

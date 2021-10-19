@@ -62,7 +62,7 @@ public class MateriaData {
                     m = new Materia();
                     
                     m.setId_materia(rs.getInt("id_materia"));
-                    m.setNombreMateria(rs.getString("nombre"));
+                    m.setNombreMateria(rs.getString("nombreMateria"));
                     m.setAnio(rs.getInt("anio"));
                     m.setActivo(rs.getBoolean("activo"));                   
                 }
@@ -90,7 +90,7 @@ public class MateriaData {
                     Materia m = new Materia();
                     
                     m.setId_materia(rs.getInt("id_materia"));
-                    m.setNombreMateria(rs.getString("nombre"));
+                    m.setNombreMateria(rs.getString("nombreMateria"));
                     m.setAnio(rs.getInt("anio"));
                     m.setActivo(rs.getBoolean("activo"));
                     

@@ -83,9 +83,10 @@ public class CursadaData {
     
     public List<Cursada> obtenerInscripcion() {
          ArrayList<Cursada> listaCursadas = new ArrayList<>();
+         String query = "SELECT * FROM cursada WHERE activo = true";
 
         try {
-            String query = "SELECT * FROM cursada WHERE activo = true";
+            
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
@@ -113,13 +114,14 @@ public class CursadaData {
     
     public List<Materia> obtenerMateriasCursadas(int id_alumno) {
         ArrayList<Materia> listaMaterias = new ArrayList<>();
+         String query = "SELECT materias.id_materia, materias.nombreMateria, materias.anio, materias.activo "
+                    + "FROM materias, cursada "
+                    + "WHERE materias.id_materia = cursada.id_materia "
+                    + "AND cursada.activo = true "
+                    + "AND cursada.id_alumno = ? ";
 
         try {
-            String query = "SELECT materias.id_materia, nombreMateria, anio, materias.activo"
-                    + "FROM materias, cursada"
-                    + "WHERE materias.id_materia = cursada.id_materia"
-                    + "AND cursada.activo = true"
-                    + "AND cursada.id_alumno = ?";
+           
 
             PreparedStatement ps = conn.prepareStatement(query);
 
@@ -133,7 +135,7 @@ public class CursadaData {
                 m.setId_materia(rs.getInt("id_materia"));
                 m.setNombreMateria(rs.getString("nombreMateria"));
                 m.setAnio(rs.getInt("anio"));
-                m.setActivo(rs.getBoolean("activo"));
+                m.setActivo(rs.getBoolean("materias.activo"));
 
                 listaMaterias.add(m);
             }
@@ -147,15 +149,16 @@ public class CursadaData {
     
     public List<Materia> obtenerMateriasNoCursadas(int id_alumno) {
         ArrayList<Materia> listaMaterias = new ArrayList<>();
+           String query = "SELECT * "
+                    + "FROM materias "
+                    + "WHERE id_materia NOT IN (SELECT materias.id_materia "
+                    + "FROM materias, cursada "
+                    + "WHERE materias.id_materia = cursada.id_materia "
+                    + "AND cursada.activo = true "
+                    + "AND cursada.id_alumno = ?) ";
 
         try {
-            String query = "SELECT *"
-                    + "FROM materias"
-                    + "WHERE id_materia NOT IN (SELECT materias.id_materia"
-                    + "FROM materias, cursada"
-                    + "WHERE materias.id_materia = cursada.id_materia"
-                    + "AND cursada.activo = true"
-                    + "AND cursada.id_alumno = ?)";
+         
 
             PreparedStatement ps = conn.prepareStatement(query);
 
@@ -183,16 +186,14 @@ public class CursadaData {
     
     public List<Alumno> obtenerAlumnosXMateria(int id_materia) {
         ArrayList<Alumno> listaAlumnosXMateria = new ArrayList<>();
-        
+        String query = "SELECT alumnos.id_alumno, alumnos.apellido, alumnos.nombre, alumnos.fechaNac, alumnos.legajo, alumnos.activo "
+                    + "FROM cursada, alumnos "
+                    + "WHERE alumnos.id_alumno = cursada.id_alumno "
+                    + "AND cursada.id_materia = ? "
+                    + "AND alumnos.activo = true "
+                    + "AND cursada.activo = true ";
         try {
-            String query = "SELECT cursada.id_alumno"
-                    + "FROM materias, cursada, alumnos"
-                    + "WHERE materias.id_materia = cursada.id_materia"
-                    + "AND alumnos.id_alumno = cursada.id_alumno"
-                    + "AND cursada.activo = true"
-                    + "AND cursada.id_materia = ?";
-
-            PreparedStatement ps = conn.prepareStatement(query, 0);
+            PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, id_materia);
             ResultSet rst = ps.executeQuery();
             
@@ -221,9 +222,11 @@ public class CursadaData {
         
         try {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(2, id_materia);
+            
+            //Cursada c = new Cursada();
             ps.setInt(3, id_alumno);
-            ps.setDouble(1, nota);
+            ps.setInt(2, id_materia);
+            ps.setDouble(1, nota); 
             
             if (ps.executeUpdate()>0){
                JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  
