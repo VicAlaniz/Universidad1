@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2021 a las 02:30:14
+-- Tiempo de generación: 19-10-2021 a las 04:19:56
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
 
@@ -36,6 +36,15 @@ CREATE TABLE `alumnos` (
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`id_alumno`, `apellido`, `nombre`, `fechaNac`, `legajo`, `activo`) VALUES
+(1, 'Alaniz', 'Vivky', '1985-10-11', 1, 1),
+(2, 'Baigorria', 'Pato', '1978-12-01', 2, 1),
+(3, 'Alaniz', 'Rama', '1982-04-25', 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +59,15 @@ CREATE TABLE `cursada` (
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `cursada`
+--
+
+INSERT INTO `cursada` (`id_cursada`, `id_materia`, `id_alumno`, `nota`, `activo`) VALUES
+(1, 2, 1, 8.5, 0),
+(4, 3, 3, 10, 1),
+(5, 3, 2, 10, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +80,16 @@ CREATE TABLE `materias` (
   `anio` int(11) NOT NULL,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `materias`
+--
+
+INSERT INTO `materias` (`id_materia`, `nombreMateria`, `anio`, `activo`) VALUES
+(1, 'Matemáticas', 1, 0),
+(2, 'Matemáticas', 1, 1),
+(3, 'Ingles', 1, 1),
+(5, 'Web', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -96,19 +124,19 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `cursada`
 --
 ALTER TABLE `cursada`
-  MODIFY `id_cursada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cursada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
