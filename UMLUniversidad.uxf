@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>784</y>
+      <w>224</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>AlumnoData
+--
+-Connection conn
+--
++AlumnoData(Conectar conexion)
++void guardarAlumno(Alumno alum)
++List&lt;Alumno&gt; listaDeAlumnos()
++Alumno buscarAlumno(int id_alumno)
++void borrarAlumno(int id_alumno)
++void actualizarAlumno(Alumno alum)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>456</y>
+      <w>336</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>CursadaData
+--
+-Connection conn
+-MateriaData md
+-AlumnoData ad
+--
++CursadaData(Conectar conn)
++void guardarCursada(Cursada c)
++void borrarCursada(int id_alumno, int id_materia)
++List&lt;Cursada&gt; obtenerInscripcion()
++List&lt;Materia&gt; obtenerMateriasCursadas(int id_alumno)
++List&lt;Materia&gt; obtenerMateriasNoCursadas(int id_alumno)
++List&lt;Alumno&gt; obtenerAlumnosXMateria(int id_materia)
++void actualizarNotas(int id_materia, int id_alumno, double nota)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>104</x>
+      <y>624</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>104</x>
+      <y>688</y>
+      <w>40</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>240</y>
+      <w>224</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>MateriaData
+--
+-Connection conn
+--
++MateriaData(Conectar conexionMateria)
++void guardarMateria(Materia m)
++Materia buscarMateria(int id_materia)
++List&lt;Materia&gt; listarMaterias()
++void actualizarMateria(Materia m)
++void borrarMateria(int id_materia)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>360</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>392</y>
+      <w>40</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>712</y>
+      <w>520</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>Alumno
+--
+-int id_alumno
+-String apellido
+-String nombre
+-LocalDate fechaNac
+-int legajo
+-boolean activo
+--
++Alumno(int id_alumno, String apellido, String nombre, LocalDate fechaNac, int legajo, boolean activo)
++Alumno(String apellido, String nombre, LocalDate fechaNac, int legajo, boolean activo)
++Alumno()
++int getId_alumno()
++void setId_alumno(int id_alumno)
++String getApellido()
++void setApellido(String apellido)
++String getNombre()
++void setNombre(String nombre)
++LocalDate getFechaNac()
++void setFechaNac(LocalDate fechaNac)
++int getLegajo()
++void setLegajo(int legajo)
++boolean isActivo()
++void setActivo(boolean activo)
++String toString()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>856</y>
+      <w>96</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1.1
+m2=1.1</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>624</y>
+      <w>120</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1.1
+m2=1.1</panel_attributes>
+    <additional_attributes>130.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>488</x>
+      <y>376</y>
+      <w>448</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>Cursada
+--
+-int id_cursada
+-Materia materia
+-Alumno alumno
+-double nota
+-boolean activo
+--
++Cursada(int id_cursada, Materia materia, Alumno alumno, double nota, boolean activo)
++Cursada(Materia materia, Alumno alumno, double nota, boolean activo)
++Cursada()
++int getId_cursada()
++void setId_cursada(int id_cursada)
++Materia getMateria()
++void setMateria(Materia materia)
++Alumno getAlumno()
++void setAlumno(Alumno alumno)
++double getNota()
++void setNota(double nota)
++boolean isActivo()
++void setActiva(boolean activo)
++String toString()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>656</y>
+      <w>40</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1
+</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>640</y>
+      <w>24</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>328</x>
+      <y>528</y>
+      <w>176</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1.1
+m2=1.1</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>472</x>
+      <y>40</y>
+      <w>464</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>Materia
+--
+-int id_materia
+-String nombreMateria
+-int anio
+-boolean activo
+--
++Materia(int id_materia, String nombreMateria, int anio, boolean activo)
++Materia(String nombreMateria, int anio, boolean activo)
++Materia()
++int getId_materia()
++void setId_materia(int id_materia)
++String getNombreMateria()
++void setNombreMateria(String nombreMateria)
++int getAnio()
++void setAnio(int anio)
++boolean isActivo()
++void setActivo(boolean activo)
++String toString()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>152</y>
+      <w>248</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1.1
+m2=1.1</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;10.0;10.0;380.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>168</x>
+      <y>120</y>
+      <w>320</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m1=1.1
+m2=1.1</panel_attributes>
+    <additional_attributes>380.0;10.0;10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>656</x>
+      <y>312</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>656</x>
+      <y>280</y>
+      <w>40</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1..1
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>56</x>
+      <y>0</y>
+      <w>144</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Universidad1
+--
+
+--
++void main(String[] args)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>0</y>
+      <w>160</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Conectar
+--
+~Connection conn
+-String url
+--
++Connection getConexion()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
