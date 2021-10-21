@@ -25,7 +25,7 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
     public VistaAlumnos() {
         
         initComponents();
-        conexion = new Conectar("jdbc:mysql://localhost/universidad", "root", "");
+        conexion = new Conectar();
         alumnoData = new AlumnoData(conexion);
     }
 
