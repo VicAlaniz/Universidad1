@@ -23,8 +23,8 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
      * Creates new form VistaAlumnos
      */
     public VistaAlumnos() {
-        initComponents();
         
+        initComponents();
         conexion = new Conectar("jdbc:mysql://localhost/universidad", "root", "");
         alumnoData = new AlumnoData(conexion);
     }

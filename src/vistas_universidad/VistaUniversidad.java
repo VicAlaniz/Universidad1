@@ -82,6 +82,11 @@ public class VistaUniversidad extends javax.swing.JFrame {
         });
 
         jMenuItem3.setText("Formulario de Alumnos");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem3);
 
         jMenuBar2.add(jMenu4);
@@ -138,13 +143,18 @@ public class VistaUniversidad extends javax.swing.JFrame {
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
         // TODO add your handling code here:
-          escritorio.removeAll();
+         
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+         escritorio.removeAll();
           escritorio.repaint();
           VistaAlumnos va=new VistaAlumnos();
           va.setVisible(true);
           escritorio.add(va);
           escritorio.moveToFront(va);
-    }//GEN-LAST:event_jMenu4ActionPerformed
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
