@@ -49,7 +49,7 @@ public class AlumnoData {
         ArrayList<Alumno> listaDeAlumnos = new ArrayList<>();
         
         String query = "SELECT * FROM alumnos WHERE activo = true";
-        
+         
         try{
             PreparedStatement ps = conn.prepareStatement(query, 0);
             ResultSet rst = ps.executeQuery();
