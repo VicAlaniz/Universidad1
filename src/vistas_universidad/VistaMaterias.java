@@ -5,17 +5,24 @@
  */
 package vistas_universidad;
 
+import data_universidad.MateriaData;
+import universidad1.Conectar;
+import universidad1.Materia;
+
 /**
  *
  * @author Administrador
  */
 public class VistaMaterias extends javax.swing.JInternalFrame {
-
+    private MateriaData materiaData;
+    private Conectar conexion;
     /**
      * Creates new form VistaMaterias
      */
     public VistaMaterias() {
         initComponents();
+        conexion = new Conectar();
+        materiaData = new MateriaData(conexion);
     }
 
     /**
@@ -63,11 +70,21 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
         jbLimpiar.setText("Limpiar");
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jlTitulo.setText("MATERIA");
 
         jlId.setText("ID");
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jlNombre.setText("NOMBRE");
 
@@ -83,10 +100,25 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         });
 
         jbBorrar1.setText("Borrar");
+        jbBorrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrar1ActionPerformed(evt);
+            }
+        });
 
         jbActualizar1.setText("Actualizar");
+        jbActualizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizar1ActionPerformed(evt);
+            }
+        });
 
         jbLimpiar1.setText("Limpiar");
+        jbLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +200,54 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
     private void jbGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardar1ActionPerformed
         // TODO add your handling code here:
+        String nombreMateria = jtNombre.getText();
+        int anio = Integer.parseInt(jtAnio.getText());
+        boolean activo = jcActivo.isEnabled();
+        
+        Materia materia = new Materia(nombreMateria, anio, activo);
+        
+        materiaData.guardarMateria(materia);
+        jtId.setText(materia.getId_materia()+"");
     }//GEN-LAST:event_jbGuardar1ActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(jtId.getText());
+        Materia materia = materiaData.buscarMateria(id);
+        
+        if(materia!=null){
+            jtId.setText(materia.getId_materia()+"");
+            jtNombre.setText(materia.getNombreMateria());
+            jtAnio.setText(materia.getAnio()+"");
+            jcActivo.setSelected(materia.isActivo());
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbBorrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrar1ActionPerformed
+        // TODO add your handling code here:
+        int id=Integer.parseInt(jtId.getText());
+        materiaData.borrarMateria(id);
+    }//GEN-LAST:event_jbBorrar1ActionPerformed
+
+    private void jbActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar1ActionPerformed
+        // TODO add your handling code here:
+          if(jtId.getText()!=null){
+            String nombreMateria = jtNombre.getText();
+            int anio = Integer.parseInt(jtAnio.getText());
+            boolean activo = jcActivo.isEnabled();
+        
+            Materia materia = new Materia(nombreMateria, anio, activo); 
+            materiaData.actualizarMateria(materia);
+        }
+    }//GEN-LAST:event_jbActualizar1ActionPerformed
+
+    private void jbLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiar1ActionPerformed
+        // TODO add your handling code here:
+        jtId.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jcActivo.setEnabled(false);
+    }//GEN-LAST:event_jbLimpiar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

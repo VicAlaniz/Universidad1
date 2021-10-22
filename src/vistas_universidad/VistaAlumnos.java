@@ -57,6 +57,11 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         jtLegajo = new javax.swing.JTextField();
         jdFechaNac = new com.toedter.calendar.JDateChooser();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jlTitulo.setText("ALUMNO");
 
         jlId.setText("ID");
@@ -132,24 +137,22 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBorrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbLimpiar))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jlId)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jtId))
-                                            .addComponent(jlFechaNac, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(jlId)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jdFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jbGuardar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbBorrar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbActualizar)))
+                                        .addComponent(jtId))
+                                    .addComponent(jlFechaNac, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(18, 18, 18)
-                                .addComponent(jbLimpiar))))
+                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,10 +186,10 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jlLegajo)
                     .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlActivo)
                     .addComponent(chActivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbBorrar)
@@ -256,8 +259,8 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             jtId.setText(alumno.getId_alumno()+"");
             jtNombre.setText(alumno.getNombre());
             jtApellido.setText(alumno.getApellido());
-            jdFechaNac.setToolTipText(alumno.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            //jtLegajo.setText(Integer.parseInt(alumno.getLegajo()));
+            jdFechaNac.setDateFormatString(alumno.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            jtLegajo.setText(alumno.getLegajo()+"");
             chActivo.setSelected(alumno.isActivo());
         }
     }//GEN-LAST:event_jbBuscarActionPerformed

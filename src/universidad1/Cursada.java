@@ -77,7 +77,7 @@ public class Cursada {
 
     @Override
     public String toString() {
-        return "Cursada{" + "id_cursada=" + id_cursada + ", materia=" + materia + ", alumno=" + alumno + ", nota=" + nota + ", activo=" + activo + '}';
+        return id_cursada + "- " + materia + "- " + alumno;
     }
     
     
