@@ -16,26 +16,23 @@ import javax.swing.JOptionPane;
  */
 public class Conectar {
     Connection conn = null;
-    
     private String url = "jdbc:mysql://localhost/universidad";
 
+    public Conectar() {
+    }
   
     public Connection getConexion(){
-        
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(url, "root", "");
-                    
+            conn = DriverManager.getConnection(url, "root", "");        
             System.out.println("Conexión establecida con éxito");
-                    } 
+        } 
         catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar drivers");
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar");
         }
-        
-        
         return conn;
     }
 }

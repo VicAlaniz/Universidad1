@@ -77,7 +77,6 @@ public class AlumnoData {
         Alumno alum = null;
         
         String query = "SELECT * FROM alumnos WHERE id_alumno = ? AND activo = true";
-        
         try{
             PreparedStatement ps = conn.prepareStatement(query, id_alumno);
             ps.setInt(1, id_alumno);

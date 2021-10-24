@@ -35,7 +35,6 @@ public class MateriaData {
                 ps.setString(1, m.getNombreMateria());
                 ps.setInt(2, m.getAnio());
                 ps.setBoolean(3, m.isActivo());
-                
                 ps.executeUpdate();
             ResultSet rst = ps.getGeneratedKeys();
             
@@ -60,7 +59,6 @@ public class MateriaData {
                 
                 while(rs.next()){
                     m = new Materia();
-                    
                     m.setId_materia(rs.getInt("id_materia"));
                     m.setNombreMateria(rs.getString("nombreMateria"));
                     m.setAnio(rs.getInt("anio"));
@@ -72,16 +70,11 @@ public class MateriaData {
             }
         return m;
     }
-        
-    /**
-     *
-     * @return
-     */
+
     public List<Materia> listarMaterias(){
         ArrayList<Materia> listaMaterias = new ArrayList<>();
         
         String query = "SELECT * FROM materias WHERE activo = true";
-        
          try { 
                 PreparedStatement ps = conn.prepareStatement(query, 0);
                 ResultSet rs = ps.executeQuery();
@@ -123,7 +116,6 @@ public class MateriaData {
                  JOptionPane.showMessageDialog(null, "Materia no cargada en el registro");
              }
              ps.close();
-             
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error al actualizar materia");
          }
@@ -142,7 +134,6 @@ public class MateriaData {
                  JOptionPane.showMessageDialog(null, "No se realizaron cambios");
              }
              ps.close();
-             
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error al borrar");
          }

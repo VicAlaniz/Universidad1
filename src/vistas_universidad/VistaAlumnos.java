@@ -6,6 +6,7 @@
 package vistas_universidad;
 
 import data_universidad.AlumnoData;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import universidad1.Alumno;
@@ -121,44 +122,49 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlActivo)
-                                .addGap(18, 18, 18)
-                                .addComponent(chActivo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlNombre)
-                                    .addComponent(jlApellido))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlLegajo)
-                                .addGap(34, 34, 34)
-                                .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbBorrar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbActualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbLimpiar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jlId)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtId))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlId, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlFechaNac, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(18, 18, 18)
-                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jbBuscar))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlNombre)
+                                            .addComponent(jlApellido))
+                                        .addGap(70, 70, 70)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jbGuardar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbBorrar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbActualizar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbLimpiar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlLegajo)
+                                            .addComponent(jlActivo))
+                                        .addGap(80, 80, 80)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chActivo)
+                                            .addComponent(jtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 16, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbBuscar)
-                            .addComponent(jlTitulo))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(jlTitulo)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +195,7 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlActivo)
                     .addComponent(chActivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbBorrar)
@@ -234,7 +240,6 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             boolean activo=chActivo.isEnabled();
         
             Alumno alumno=new Alumno(apellido, nombre, fechaNac, legajo, activo);
-            
             alumnoData.actualizarAlumno(alumno);
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
@@ -244,14 +249,13 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         jtId.setText("");
         jtNombre.setText("");
         jtApellido.setText("");
-        jdFechaNac.setToolTipText("");
+        jdFechaNac.setDateFormatString("");
         jtLegajo.setText("");
         chActivo.setEnabled(false);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        
         int id=Integer.parseInt(jtId.getText());
         Alumno alumno=alumnoData.buscarAlumno(id);
         
@@ -259,7 +263,7 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             jtId.setText(alumno.getId_alumno()+"");
             jtNombre.setText(alumno.getNombre());
             jtApellido.setText(alumno.getApellido());
-            jdFechaNac.setDateFormatString(alumno.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            jdFechaNac.setDate(Date.valueOf(alumno.getFechaNac().toString()));
             jtLegajo.setText(alumno.getLegajo()+"");
             chActivo.setSelected(alumno.isActivo());
         }
