@@ -60,8 +60,8 @@ public class Universidad1 {
         Cursada cr = new Cursada(i, p, 10, true);
         Cursada c = new Cursada(i, r, 10, true);
         
-        cd.guardarCursada(c);
-        cd.guardarCursada(cr);
+        //cd.guardarCursada(c);
+        //cd.guardarCursada(cr);
         //cd.guardarCursada(cr);
         
         //System.out.println("Inscripcion realizada");

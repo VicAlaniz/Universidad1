@@ -109,8 +109,18 @@ public class VistaUniversidad extends javax.swing.JFrame {
         jMenuBar2.add(jmInscripcion);
 
         jmCargaNotas.setText("Carga de Notas");
+        jmCargaNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCargaNotasActionPerformed(evt);
+            }
+        });
 
         jmMan.setText("Manipulación de Notas");
+        jmMan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmManActionPerformed(evt);
+            }
+        });
         jmCargaNotas.add(jmMan);
 
         jMenuBar2.add(jmCargaNotas);
@@ -158,7 +168,7 @@ public class VistaUniversidad extends javax.swing.JFrame {
 
     private void jmAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumActionPerformed
         // TODO add your handling code here:
-         escritorio.removeAll();
+          escritorio.removeAll();
           escritorio.repaint();
           VistaAlumnos va=new VistaAlumnos();
           va.setVisible(true);
@@ -185,6 +195,20 @@ public class VistaUniversidad extends javax.swing.JFrame {
           escritorio.add(vam);
           escritorio.moveToFront(vam);
     }//GEN-LAST:event_jmListAlumActionPerformed
+
+    private void jmCargaNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCargaNotasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmCargaNotasActionPerformed
+
+    private void jmManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManActionPerformed
+        // TODO add your handling code here:
+          escritorio.removeAll();
+          escritorio.repaint();
+          VistaCargarNota vcn = new VistaCargarNota();
+          vcn.setVisible(true);
+          escritorio.add(vcn);
+          escritorio.moveToFront(vcn);
+    }//GEN-LAST:event_jmManActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,7 +239,6 @@ public class VistaUniversidad extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

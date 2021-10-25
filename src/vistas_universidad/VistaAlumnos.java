@@ -9,6 +9,7 @@ import data_universidad.AlumnoData;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import universidad1.Alumno;
 import universidad1.Conectar;
 
@@ -29,7 +30,6 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         conexion = new Conectar();
         alumnoData = new AlumnoData(conexion);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,16 +216,15 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         int legajo=Integer.parseInt(jtLegajo.getText());
         boolean activo=chActivo.isEnabled();
         
-        Alumno alumno=new Alumno(apellido, nombre, fechaNac, legajo, activo);
+        Alumno alumno = new Alumno(apellido, nombre, fechaNac, legajo, activo);
         
         alumnoData.guardarAlumno(alumno);
-        jtId.setText(alumno.getId_alumno()+"");
+        jtId.setText(alumno.getId_alumno() + "");
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
-        
-        int id=Integer.parseInt(jtId.getText());
+        int id = Integer.parseInt(jtId.getText());
         alumnoData.borrarAlumno(id);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
@@ -239,8 +238,10 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             int legajo=Integer.parseInt(jtLegajo.getText());
             boolean activo=chActivo.isEnabled();
         
-            Alumno alumno=new Alumno(apellido, nombre, fechaNac, legajo, activo);
+            Alumno alumno = new Alumno(apellido, nombre, fechaNac, legajo, activo);
             alumnoData.actualizarAlumno(alumno);
+        }else{
+            JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
 
@@ -256,16 +257,18 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        int id=Integer.parseInt(jtId.getText());
-        Alumno alumno=alumnoData.buscarAlumno(id);
+        int id = Integer.parseInt(jtId.getText());
+        Alumno alumno = alumnoData.buscarAlumno(id);
         
-        if(alumno!=null){
+        if(alumno != null){
             jtId.setText(alumno.getId_alumno()+"");
             jtNombre.setText(alumno.getNombre());
             jtApellido.setText(alumno.getApellido());
             jdFechaNac.setDate(Date.valueOf(alumno.getFechaNac().toString()));
             jtLegajo.setText(alumno.getLegajo()+"");
             chActivo.setSelected(alumno.isActivo());
+        }else{
+            JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 

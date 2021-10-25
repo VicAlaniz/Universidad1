@@ -28,8 +28,6 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     private AlumnoData alumnoData;
     private ArrayList<Alumno> listaAlumnos;
     private Conectar conexion;
-    
-    
     /**
      * Creates new form VistaAlumnosMaterias
      */
@@ -50,11 +48,8 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         
         cargarMaterias();
         armaCabeceraTabla();
-        cargarDatos();
-        
-        
+        cargarDatos();  
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,9 +70,10 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
+        jlTitulo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jlTitulo.setText("LISTADO DE ALUMNOS POR MATERIA");
 
-        jlMateria.setText("MATERIA:");
+        jlMateria.setText("MATERIAS:");
 
         jcMaterias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,20 +101,19 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(jlTitulo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jlMateria)
-                                .addGap(33, 33, 33)
-                                .addComponent(jcMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(jlMateria)
+                        .addGap(33, 33, 33)
+                        .addComponent(jcMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jlTitulo)
+                .addGap(216, 216, 216))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +126,7 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
                     .addComponent(jcMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +138,6 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcMateriasActionPerformed
 
     public void cargarMaterias() {
-        
         for(Materia item: listaMaterias) {
             jcMaterias.addItem(item);
         }
