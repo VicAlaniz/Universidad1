@@ -110,8 +110,38 @@ public class CursadaData {
         return listaCursadas;
     }
         
-    
-    
+    public List<Cursada> obtenerCursadasXAlumno(int id_alumno){
+        ArrayList<Cursada> cursadas = new ArrayList<>();
+        String query = "SELECT * FROM cursada WHERE id_alumno = ?;";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            ps.setInt(1,id_alumno);             // filtrar para un alumno
+            
+            //Cursada cursada;
+            while(rs.next()){
+                Cursada c = new Cursada();
+                c.setId_cursada(rs.getInt("id_cursada"));
+                
+                Alumno a = ad.buscarAlumno(rs.getInt("id_alumno"));
+                c.setAlumno(a);
+                
+                Materia m = md.buscarMateria(rs.getInt("id_materia"));
+                c.setMateria(m);
+                c.setNota(rs.getDouble("nota"));
+               
+
+                cursadas.add(c);
+            }      
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al crear la lista");
+        }
+        return cursadas;
+
+        
+    }
     public List<Materia> obtenerMateriasCursadas(int id_alumno) {
         ArrayList<Materia> listaMaterias = new ArrayList<>();
          String query = "SELECT materias.id_materia, materias.nombreMateria, materias.anio, materias.activo "
@@ -141,7 +171,7 @@ public class CursadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            JOptionPane.showMessageDialog(null, "Error al cargar materias" + ex);
         }
         return listaMaterias;
     
@@ -178,7 +208,7 @@ public class CursadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex);
+            JOptionPane.showMessageDialog(null, "Error al obtener materias" + ex);
         }
         return listaMaterias;
     
@@ -217,24 +247,22 @@ public class CursadaData {
     }
     
         
-   public void actualizarNotas(int id_materia, int id_alumno, double nota){
-        String query = "UPDATE cursada SET nota = ? WHERE cursada.id_materia = ? AND cursada.id_alumno = ?";
+   public void actualizarNotas(int id_cursada, double nota){
+        String query = "UPDATE cursada SET nota = ? WHERE id_cursada = ?; ";
         
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             
-            //Cursada c = new Cursada();
             ps.setDouble(1, nota); 
-            ps.setInt(2, id_materia);
-            ps.setInt(3, id_alumno);
+            ps.setInt(2, id_cursada);
             
             ps.executeUpdate();
-            if (ps.executeUpdate()>0){
+            //if (ps.executeUpdate()>0){
                JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  
-             }
-             else {
-                 JOptionPane.showMessageDialog(null, "Error al cargar la nota");
-             }
+            // }
+             //else {
+               //  JOptionPane.showMessageDialog(null, "Error al cargar la nota");
+             //}
              ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error");

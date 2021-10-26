@@ -33,6 +33,10 @@ public class Materia {
         
     }
 
+    public Materia(int id_materia, String nombreMateria, int anio) {
+       //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId_materia() {
         return id_materia;
     }

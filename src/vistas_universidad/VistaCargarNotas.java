@@ -70,8 +70,8 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         
         Alumno select = (Alumno) jcbAlumno.getSelectedItem();
         
-        List<Cursada> lista = cd.obtenerInscripcion();
-        
+        //List<Cursada> lista = cd.obtenerCursadasXAlumno(select.getId_alumno());
+        List<Cursada> lista = cd.obtenerCursadasXAlumno(select.getId_alumno());
         for (Cursada c: lista){
             modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria(), c.getNota()});
         }
@@ -195,6 +195,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
 
     private void jcbAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoActionPerformed
         // TODO add your handling code here:
+        //borrarFilasTabla();
         cargarDatos();
     }//GEN-LAST:event_jcbAlumnoActionPerformed
 
@@ -209,11 +210,11 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         int filaSelect = jtTablaMaterias.getSelectedRow();
         if (filaSelect != -1){
             Alumno a = (Alumno) jcbAlumno.getSelectedItem();
-            int id_materia = (Integer) modelo.getValueAt(filaSelect, 0);
-            
-            double nota = (Double) modelo.getValueAt(filaSelect, 2);
+           int id_cursada = Integer.valueOf(jtTablaMaterias.getValueAt(filaSelect, 0).toString());
+            //int id_cursada = (Integer) modelo.getValueAt(filaSelect, 0);
+            double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 2));
 
-            cd.actualizarNotas(id_materia, a.getId_alumno(), nota);
+            cd.actualizarNotas(id_cursada, nota);
             borrarFilasTabla();
             
         }

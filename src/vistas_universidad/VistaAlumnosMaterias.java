@@ -65,6 +65,7 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         jcMaterias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtAlumnos = new javax.swing.JTable();
+        jbSalir = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -100,6 +101,13 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtAlumnos);
 
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,8 +126,13 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jlTitulo)
-                .addGap(216, 216, 216))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jlTitulo)
+                        .addGap(216, 216, 216))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbSalir)
+                        .addGap(89, 89, 89))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +145,9 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
                     .addComponent(jcMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addComponent(jbSalir)
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -142,6 +157,11 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         cargarDatos();
     }//GEN-LAST:event_jcMateriasActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+         dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     public void cargarMaterias() {
         
@@ -184,6 +204,7 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Materia> jcMaterias;
     private javax.swing.JLabel jlMateria;
     private javax.swing.JLabel jlTitulo;

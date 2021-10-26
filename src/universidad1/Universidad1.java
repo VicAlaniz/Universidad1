@@ -66,7 +66,7 @@ public class Universidad1 {
         
         //System.out.println("Inscripcion realizada");
         
-        //cd.actualizarNotas(2, 1, 8.5);
+        //cd.actualizarNotas(3, 3, 7);
         //ad.listaDeAlumnos();
         //md.listarMaterias();
         //cd.obtenerInscripcion();
