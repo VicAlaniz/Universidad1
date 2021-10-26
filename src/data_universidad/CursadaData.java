@@ -229,12 +229,12 @@ public class CursadaData {
             ps.setInt(3, id_alumno);
             
             ps.executeUpdate();
-            /*if (ps.executeUpdate()>0){
+            if (ps.executeUpdate()>0){
                JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  
              }
              else {
                  JOptionPane.showMessageDialog(null, "Error al cargar la nota");
-             }*/
+             }
              ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error");

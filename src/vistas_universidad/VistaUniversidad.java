@@ -212,7 +212,7 @@ public class VistaUniversidad extends javax.swing.JFrame {
         // TODO add your handling code here:
           escritorio.removeAll();
           escritorio.repaint();
-          VistaCargarNota vcn = new VistaCargarNota();
+          VistaCargarNotas vcn = new VistaCargarNotas();
           vcn.setVisible(true);
           escritorio.add(vcn);
           escritorio.moveToFront(vcn);

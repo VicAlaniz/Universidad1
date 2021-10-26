@@ -33,6 +33,7 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaInscripciones
      */
+
     public VistaInscripciones() {
         initComponents();
         conexion = new Conectar();
@@ -89,6 +90,12 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         jLabel1.setText("Formulario de Inscripcion");
 
         jLabel2.setText("Alumno");
+
+        jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnosActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("LISTA DE MATERIAS");
 
@@ -178,6 +185,10 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbAlumnosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

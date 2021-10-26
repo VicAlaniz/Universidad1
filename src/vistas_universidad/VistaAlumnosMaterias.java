@@ -82,6 +82,11 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
             }
         });
 
+        jtAlumnos = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         jtAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -139,12 +144,14 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcMateriasActionPerformed
 
     public void cargarMaterias() {
+        
         for(Materia item: listaMaterias) {
             jcMaterias.addItem(item);
         }
     }
     
     public void armaCabeceraTabla() {
+        jtAlumnos.getTableHeader().setReorderingAllowed(false);
         ArrayList<Object> columns = new ArrayList<Object>();
         
         columns.add("ID");

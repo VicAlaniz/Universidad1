@@ -9,6 +9,7 @@ import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidad1.Alumno;
 import universidad1.Conectar;
@@ -51,7 +52,8 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
     }
     
     public void cargarAlumnos(){
-        for(Alumno item:listaAlumnos){
+        List <Alumno> alumnos = alumnoData.listaDeAlumnos();
+        for(Alumno item:alumnos){
             jcbAlumnos.addItem(item);
         }
     }
@@ -80,8 +82,9 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
         borrarFilasTabla();
         
         Alumno alumn = (Alumno)jcbAlumnos.getSelectedItem();
+        List<Cursada> lista = cursadaData.obtenerInscripcion();
         
-        for (Cursada a: listaCursada){
+        for (Cursada a: lista){
             if(a.getAlumno().getId_alumno() == alumn.getId_alumno()){
                 modelo.addRow(new Object[] {a.getMateria().getId_materia(), a.getMateria().getNombreMateria(), a.getNota()});
             }
@@ -195,7 +198,7 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // TODO add your handling code here:
-        cargarAlumnos();
+        cargarDatos();
         
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
