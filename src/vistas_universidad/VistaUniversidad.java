@@ -155,10 +155,17 @@ public class VistaUniversidad extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jmInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmInscActionPerformed
         // TODO add your handling code here:
+          escritorio.removeAll();
+          escritorio.repaint();
+          VistaInscripciones vi = new VistaInscripciones();
+          vi.setVisible(true);
+          escritorio.add(vi);
+          escritorio.moveToFront(vi);
     }//GEN-LAST:event_jmInscActionPerformed
 
     private void jmAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAlumnoActionPerformed
@@ -198,6 +205,7 @@ public class VistaUniversidad extends javax.swing.JFrame {
 
     private void jmCargaNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCargaNotasActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jmCargaNotasActionPerformed
 
     private void jmManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmManActionPerformed

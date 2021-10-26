@@ -45,8 +45,8 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
         materiaData = new MateriaData(conexion);
         listaMaterias = (ArrayList)materiaData.listarMaterias();
         
-        armarCabeceraTabla();
         cargarAlumnos();
+        armarCabeceraTabla();
         cargarDatos();
     }
     
@@ -57,13 +57,13 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
     }
     
     public void armarCabeceraTabla() {
-        ArrayList<Object> info = new ArrayList<Object>();
+        ArrayList<Object> columns = new ArrayList<Object>();
         
-        info.add("ID");
-        info.add("Materia");
-        info.add("Nota");
+        columns.add("ID");
+        columns.add("Materia");
+        columns.add("Nota");
         
-        for (Object it:info) {
+        for (Object it:columns) {
             modelo.addColumn(it);
         }
         jtAlumnos.setModel(modelo);
@@ -195,7 +195,8 @@ public class VistaCargarNota extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // TODO add your handling code here:
-        cargarDatos();
+        cargarAlumnos();
+        
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed

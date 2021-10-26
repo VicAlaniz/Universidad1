@@ -9,6 +9,7 @@ import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidad1.Alumno;
 import universidad1.Conectar;
@@ -45,6 +46,15 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         
         materiaData = new MateriaData(conexion);
         listaMaterias = (ArrayList)materiaData.listarMaterias();
+        cargarAlumnos();
+    }
+    
+    public void cargarAlumnos() {
+        List <Alumno> alumnos = alumnoData.listaDeAlumnos();
+        
+        for (Alumno a:alumnos){
+            jcbAlumnos.addItem(a);
+        }
     }
 
     /**

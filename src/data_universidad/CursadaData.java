@@ -165,7 +165,7 @@ public class CursadaData {
             ps.setInt(1, id_alumno);
 
             ResultSet rs = ps.executeQuery();
-
+            
             while (rs.next()) {
                 Materia m = new Materia();
 
@@ -224,16 +224,17 @@ public class CursadaData {
             PreparedStatement ps = conn.prepareStatement(query);
             
             //Cursada c = new Cursada();
-            ps.setInt(3, id_alumno);
-            ps.setInt(2, id_materia);
             ps.setDouble(1, nota); 
+            ps.setInt(2, id_materia);
+            ps.setInt(3, id_alumno);
             
-            if (ps.executeUpdate()>0){
+            ps.executeUpdate();
+            /*if (ps.executeUpdate()>0){
                JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  
              }
              else {
                  JOptionPane.showMessageDialog(null, "Error al cargar la nota");
-             }
+             }*/
              ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error");

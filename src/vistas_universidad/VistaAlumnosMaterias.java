@@ -19,9 +19,10 @@ import universidad1.Materia;
  *
  * @author Administrador
  */
-public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
+@SuppressWarnings("serial")
+public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo;
-    private ArrayList<Cursada> listaCursada;
+    private ArrayList<Cursada> listaCursadas;
     private ArrayList<Materia> listaMaterias;
     private CursadaData cursadaData;
     private MateriaData materiaData;
@@ -38,7 +39,7 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         
         cursadaData = new CursadaData(conexion);
-        listaCursada = (ArrayList)cursadaData.obtenerInscripcion();
+        listaCursadas = (ArrayList)cursadaData.obtenerInscripcion();
         
         materiaData = new MateriaData(conexion);
         listaMaterias = (ArrayList)materiaData.listarMaterias();
@@ -168,9 +169,9 @@ public class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
         
         Materia mat = (Materia)jcMaterias.getSelectedItem();
         
-        for (Cursada m: listaCursada) {
+        for (Cursada m: listaCursadas) {
             if(m.getMateria().getId_materia()==mat.getId_materia()) {
-                modelo.addRow(new Object[] {m.getAlumno().getId_alumno(), m.getAlumno().getNombre(), m.getNota()});
+                modelo.addRow(new Object[]{m.getAlumno().getId_alumno(), m.getAlumno().getNombre(), m.getNota()});
             }
         }
     }
