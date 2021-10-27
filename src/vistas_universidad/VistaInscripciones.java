@@ -8,8 +8,11 @@ package vistas_universidad;
 import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import universidad1.Alumno;
 import universidad1.Conectar;
@@ -44,7 +47,6 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
  
         materiaData = new MateriaData(conexion);
         listaMaterias = (ArrayList)materiaData.listarMaterias();
-       
     }
     
     public void cargarAlumnos() {
@@ -55,7 +57,8 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         }
     }
     public void armarCabecera() {
-        //jtMaterias.getTableHeader().setReorderingAllowed(false);
+        jtMaterias.getTableHeader().setReorderingAllowed(false);
+        
         ArrayList<Object> columnas = new ArrayList<Object>();
         
         columnas.add("ID");
@@ -257,11 +260,16 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         // TODO add your handling code here:
+ 
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
     private void jrbInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptaActionPerformed
         // TODO add your handling code here:
-        jrbInscripta.setSelected(false);
+        try {
+            setSelected(false);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(VistaInscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cargarDatosInscriptas();
         jbAnular.setEnabled(true);
         jbInscribir.setEnabled(false);
@@ -313,8 +321,9 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         cargarDatosNoInscriptas();
         jbAnular.setEnabled(false);
         jbInscribir.setEnabled(true);
+        
+        gbBotones.clearSelection();
     }//GEN-LAST:event_jrbNoInscriptaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup gbBotones;

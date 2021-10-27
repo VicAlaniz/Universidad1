@@ -7,39 +7,62 @@ package vistas_universidad;
 
 import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
+import data_universidad.MateriaData;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidad1.Alumno;
 import universidad1.Conectar;
 import universidad1.Cursada;
+import universidad1.Materia;
 
 /**
  *
  * @author Administrador
  */
 public class VistaCargarNotas extends javax.swing.JInternalFrame {
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private ArrayList<Cursada> listaCursada;
+    private ArrayList<Materia> listaMaterias;
+    private ArrayList<Alumno> listaAlumnos;
+    private CursadaData cursadaData;
+    private MateriaData materiaData;
+    private AlumnoData alumnoData;
+    private Conectar conexion;
 
     AlumnoData ad;
-    CursadaData cd;
-    private DefaultTableModel modelo = new DefaultTableModel();
-    
+    CursadaData cd;    
     /**
      * Creates new form VistaCargarNotas
      */
     public VistaCargarNotas() {
         initComponents();
-        Conectar c = new Conectar();
-        ad = new AlumnoData(c);
-        cd = new CursadaData(c);
+        
+        conexion = new Conectar();
+ 
+        ad = new AlumnoData(conexion);
+        cd = new CursadaData(conexion);
+        
         armarCabeceraTabla();
         cargarAlumnos();
         
+        materiaData = new MateriaData(conexion);
+        listaMaterias = (ArrayList)materiaData.listarMaterias();
+    }
+    
+     public void cargarAlumnos() {
+        List <Alumno> alumnos = ad.listaDeAlumnos();
+        
+        for(Alumno item:alumnos){
+            jcbAlumno.addItem(item);
+        }
     }
     
     public void armarCabeceraTabla() {
         jtTablaMaterias.getTableHeader().setReorderingAllowed(false);
+        
         ArrayList<Object> columnas = new ArrayList<Object>();
+        
         columnas.add("ID");
         columnas.add("Materia");
         columnas.add("Nota");
@@ -48,13 +71,6 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
             modelo.addColumn(it);
         }
         jtTablaMaterias.setModel(modelo);
-    }
-    
-    public void cargarAlumnos() {
-        List <Alumno> alumnos = ad.listaDeAlumnos();
-        for(Alumno item:alumnos){
-            jcbAlumno.addItem(item);
-        }
     }
     
     public void borrarFilasTabla() {
@@ -68,9 +84,11 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
     public void cargarDatos() {
         borrarFilasTabla();
         
-        Alumno select = (Alumno) jcbAlumno.getSelectedItem();
+        CursadaData cd = new CursadaData(conexion);
         
-        //List<Cursada> lista = cd.obtenerCursadasXAlumno(select.getId_alumno());
+        Alumno select = (Alumno) jcbAlumno.getSelectedItem();
+        listaMaterias = (ArrayList)cd.obtenerMateriasCursadas(select.getId_alumno());
+        
         List<Cursada> lista = cd.obtenerCursadasXAlumno(select.getId_alumno());
         for (Cursada c: lista){
             modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria(), c.getNota()});
@@ -211,8 +229,8 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         if (filaSelect != -1){
             Alumno a = (Alumno) jcbAlumno.getSelectedItem();
            int id_cursada = Integer.valueOf(jtTablaMaterias.getValueAt(filaSelect, 0).toString());
-            //int id_cursada = (Integer) modelo.getValueAt(filaSelect, 0);
-            double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 2));
+           
+           double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 3));
 
             cd.actualizarNotas(id_cursada, nota);
             borrarFilasTabla();
