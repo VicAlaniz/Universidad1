@@ -53,7 +53,7 @@ public class MateriaData {
         String query = "SELECT * FROM materias WHERE id_materia = ? AND activo = true";
         
         try { 
-                PreparedStatement ps = conn.prepareStatement(query, id_materia);
+                PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, id_materia);
                 ResultSet rs = ps.executeQuery();
                 
@@ -64,9 +64,9 @@ public class MateriaData {
                     m.setAnio(rs.getInt("anio"));
                     m.setActivo(rs.getBoolean("activo"));                   
                 }
-                    ps.close();    
+                       
             } catch (SQLException ex) {
-                 JOptionPane.showMessageDialog(null, "Error, no se pudo guardar la materia");
+                 JOptionPane.showMessageDialog(null, "Error, no se pudo buscar la materia");
             }
         return m;
     }
@@ -76,7 +76,7 @@ public class MateriaData {
         
         String query = "SELECT * FROM materias WHERE activo = true";
          try { 
-                PreparedStatement ps = conn.prepareStatement(query, 0);
+                PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 ResultSet rs = ps.executeQuery();
                 
                 while(rs.next()){
@@ -88,9 +88,7 @@ public class MateriaData {
                     m.setActivo(rs.getBoolean("activo"));
                     
                     listaMaterias.add(m);
-                  }
-                    ps.close();
-                            
+                  }                            
                 
             } catch (SQLException ex) {
                  JOptionPane.showMessageDialog(null, "Error al obtener materia");
@@ -102,14 +100,15 @@ public class MateriaData {
         String query = "UPDATE materias SET nombreMateria = ?, anio = ?, activo = ?, WHERE id_materia = ?";
         
          try {
-             PreparedStatement ps = conn.prepareStatement(query, 0);
+             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
              
              ps.setInt(4, m.getId_materia());
              ps.setString(1, m.getNombreMateria());
              ps.setInt(2, m.getAnio());
              ps.setBoolean(3, m.isActivo());
-             
-             if (ps.executeUpdate()>0){
+             ResultSet rs=ps.getGeneratedKeys();
+             if (rs.next()){
+                 m.setId_materia(rs.getInt(1));
                JOptionPane.showMessageDialog(null, "Materia actualizada correctamente");  
              }
              else {

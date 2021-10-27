@@ -33,14 +33,14 @@ public class CursadaData {
         ad = new AlumnoData(conn);
     }
     public void guardarCursada(Cursada c){
-        String query = "INSERT INTO cursada(id_materia, id_alumno, nota, activo) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO cursada(id_materia, id_alumno, nota) VALUES (?, ?, ?)";
     
         try {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getMateria().getId_materia());
             ps.setInt(2, c.getAlumno().getId_alumno());
             ps.setDouble(3, c.getNota());
-            ps.setBoolean(4, c.isActivo());
+         
             
             ps.executeUpdate();
             
@@ -59,11 +59,11 @@ public class CursadaData {
     }
     
     public void borrarCursada(int id_alumno, int id_materia) {
-        String query = "UPDATE cursada SET activo = false WHERE cursada.id_materia = ? AND cursada.id_alumno = ?";
+        String query = "DELETE FROM cursada WHERE id_materia = ? AND id_alumno = ?";
         
         
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_materia);
             ps.setInt(2, id_alumno);
             
@@ -76,9 +76,7 @@ public class CursadaData {
              ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error");
-        }
-       
-        
+        }     
     }
     
     public List<Cursada> obtenerInscripcion() {
@@ -87,16 +85,16 @@ public class CursadaData {
 
         try {
             
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Cursada c = new Cursada();
 
                 c.setId_cursada(rs.getInt("id_cursada"));
-                Alumno a = ad.buscarAlumno(rs.getInt("id_alumno"));
+                Alumno a = buscarAlumno(rs.getInt("id_alumno"));
                 c.setAlumno(a);
-                Materia m = md.buscarMateria(rs.getInt("id_materia"));
+                Materia m = buscarMateria(rs.getInt("id_materia"));
                 c.setMateria(m);
                 c.setNota(rs.getDouble("nota"));
                 c.setActiva(rs.getBoolean("activo"));
@@ -112,29 +110,30 @@ public class CursadaData {
         
     public List<Cursada> obtenerCursadasXAlumno(int id_alumno){
         ArrayList<Cursada> cursadas = new ArrayList<>();
-        String query = "SELECT * FROM cursada WHERE id_alumno = ?;";
+        Cursada c;
+        String query = "SELECT * FROM cursada WHERE cursada.id_alumno = ? AND activo = true";
         try {
             
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             ps.setInt(1,id_alumno);             // filtrar para un alumno
             
             //Cursada cursada;
             while(rs.next()){
-                Cursada c = new Cursada();
-                c.setId_cursada(rs.getInt("id_cursada"));
+                c = new Cursada();
                 
-                Alumno a = ad.buscarAlumno(rs.getInt("id_alumno"));
+                
+                Alumno a = buscarAlumno(rs.getInt("id_alumno"));
                 c.setAlumno(a);
                 
-                Materia m = md.buscarMateria(rs.getInt("id_materia"));
+                Materia m = buscarMateria(rs.getInt("id_materia"));
                 c.setMateria(m);
                 c.setNota(rs.getDouble("nota"));
-               
+                c.setId_cursada(rs.getInt("id_cursada"));
 
                 cursadas.add(c);
             }      
-            ps.close();
+            //ps.close();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al crear la lista");
         }
@@ -251,7 +250,7 @@ public class CursadaData {
         String query = "UPDATE cursada SET nota = ? WHERE id_cursada = ?; ";
         
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             
             ps.setDouble(1, nota); 
             ps.setInt(2, id_cursada);
@@ -268,4 +267,43 @@ public class CursadaData {
             JOptionPane.showMessageDialog(null, "Error");
         }
        }
+
+   public Alumno buscarAlumno(int id_alumno){
+        Alumno a = new Alumno(); 
+        String query = "SELECT a.id_alumno, a.apellido, a.nombre,  a.fechaNac, a.legajo, a.activo FROM cursada AS c, alumnos AS a WHERE c.id_alumno = a.id_alumno AND c.id_alumno = ?";
+        try {
+            PreparedStatement ps= conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_alumno);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                a.setLegajo(rs.getInt("legajo"));
+                a.setActivo(rs.getBoolean("activo"));
+                a.setNombre(rs.getString("nombre"));
+                a.setApellido(rs.getString("apellido"));
+                a.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+                a.setId_alumno(rs.getInt("id_alumno"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion metodo buscar alumno");
+        }
+        return a;
+    }
+    public Materia buscarMateria(int id_materia){
+        Materia m = new Materia(); 
+        String query = "SELECT m.id_materia, m.nombreMateria, m.anio, m.activo FROM cursada AS c, materias AS m WHERE m.id_materia = c.id_materia AND m.id_materia = ?";
+        try {
+            PreparedStatement ps= conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_materia);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                m.setAnio(rs.getInt("anio"));
+                m.setNombreMateria(rs.getString("nombreMateria"));
+                m.setActivo(rs.getBoolean("activo"));
+                m.setId_materia(rs.getInt("id_materia"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion.");
+        }
+        return m;
+    }
 }

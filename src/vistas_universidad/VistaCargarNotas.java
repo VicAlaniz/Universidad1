@@ -31,7 +31,8 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
     private Conectar conexion;
 
     AlumnoData ad;
-    CursadaData cd;    
+    CursadaData cd; 
+    MateriaData md;
     /**
      * Creates new form VistaCargarNotas
      */
@@ -42,6 +43,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
  
         ad = new AlumnoData(conexion);
         cd = new CursadaData(conexion);
+        md = new MateriaData(conexion);
         
         armarCabeceraTabla();
         cargarAlumnos();
@@ -50,7 +52,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         listaMaterias = (ArrayList)materiaData.listarMaterias();
     }
     
-     public void cargarAlumnos() {
+    public void cargarAlumnos() {
         List <Alumno> alumnos = ad.listaDeAlumnos();
         
         for(Alumno item:alumnos){
@@ -87,11 +89,13 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         CursadaData cd = new CursadaData(conexion);
         
         Alumno select = (Alumno) jcbAlumno.getSelectedItem();
-        listaMaterias = (ArrayList)cd.obtenerMateriasCursadas(select.getId_alumno());
         
-        List<Cursada> lista = cd.obtenerCursadasXAlumno(select.getId_alumno());
+        int id_alumno = select.getId_alumno();
+        //listaMaterias = (ArrayList)cd.obtenerMateriasCursadas(select.getId_alumno());
+        
+        List<Cursada> lista = cd.obtenerCursadasXAlumno(id_alumno);
         for (Cursada c: lista){
-            modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria(), c.getNota()});
+            modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria().getNombreMateria(), c.getNota()});
         }
     }
 

@@ -51,7 +51,7 @@ public class AlumnoData {
         String query = "SELECT * FROM alumnos WHERE activo = true";
          
         try{
-            PreparedStatement ps = conn.prepareStatement(query, 0);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){
@@ -78,7 +78,7 @@ public class AlumnoData {
         
         String query = "SELECT * FROM alumnos WHERE id_alumno = ? AND activo = true";
         try{
-            PreparedStatement ps = conn.prepareStatement(query, id_alumno);
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_alumno);
             ResultSet rst = ps.executeQuery();
             
