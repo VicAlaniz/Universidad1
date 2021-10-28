@@ -81,15 +81,11 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         
         Alumno seleccionado = (Alumno) jcbAlumno.getSelectedItem();
         
-        //int id_alumno = seleccionado.getId_alumno();
-        //listaMaterias = (ArrayList)cd.obtenerMateriasCursadas(select.getId_alumno());
-        
         List<Cursada> lista = cd.obtenerCursadasXAlumno(seleccionado.getId_alumno());
         for (Cursada c: lista){
             modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria().getNombreMateria(), c.getNota()});
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,17 +219,20 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         int filaSelect = jtTablaMaterias.getSelectedRow();
         if (filaSelect != -1){
             Alumno a = (Alumno) jcbAlumno.getSelectedItem();
-           int id_cursada = Integer.valueOf(jtTablaMaterias.getValueAt(filaSelect, 0).toString());
-           
-           double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 3));
-
-            cd.actualizarNotas(id_cursada, nota);
-            borrarFilasTabla();
             
+            int idInscripcion = (Integer) modelo.getValueAt(filaSelect, 0);
+            Materia m = (Materia) modelo.getValueAt(filaSelect, 1);
+            double nota = Double.valueOf(modelo.getValueAt(filaSelect, 2).toString());
+           //int id_cursada = Integer.valueOf(jtTablaMaterias.getValueAt(filaSelect, 0).toString());
+           //double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 2));
+            System.out.println(idInscripcion);
+            System.out.println(nota);
+            Conectar i;
+            i = (Conectar) cd.obtenerInscripcion();
+            cd.actualizarNotas(idInscripcion, nota);
+            borrarFilasTabla();
         }
-        
     }//GEN-LAST:event_jbGuardarActionPerformed
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
