@@ -25,9 +25,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
     private ArrayList<Cursada> listaCursada;
     private ArrayList<Materia> listaMaterias;
     private ArrayList<Alumno> listaAlumnos;
-    private CursadaData cursadaData;
     private MateriaData materiaData;
-    private AlumnoData alumnoData;
     private Conectar conexion;
 
     AlumnoData ad;
@@ -62,6 +60,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         columnas.add("ID");
         columnas.add("Materia");
         columnas.add("Nota");
+        
         for (Object it: columnas) {
             modelo.addColumn(it);
         }
@@ -217,6 +216,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
         int filaSelect = jtTablaMaterias.getSelectedRow();
+        
         if (filaSelect != -1){
             Alumno a = (Alumno) jcbAlumno.getSelectedItem();
             

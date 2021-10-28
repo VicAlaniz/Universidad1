@@ -40,7 +40,6 @@ public class CursadaData {
             ps.setInt(1, c.getMateria().getId_materia());
             ps.setInt(2, c.getAlumno().getId_alumno());
             ps.setDouble(3, c.getNota());
-         
             
             ps.executeUpdate();
             

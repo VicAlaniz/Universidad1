@@ -28,11 +28,11 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
     private ArrayList<Cursada> listaCursada;
     private ArrayList<Materia> listaMaterias;
     private ArrayList<Alumno> listaAlumnos;
-    private CursadaData cursadaData;
     private MateriaData materiaData;
-    private AlumnoData alumnoData;
     private Conectar conexion;
     
+    AlumnoData ad;
+    CursadaData cd;
     /**
      * Creates new form VistaInscripciones
      */
@@ -40,17 +40,15 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
     public VistaInscripciones() {
         initComponents();
         conexion = new Conectar();
-        alumnoData = new AlumnoData(conexion);
+        ad = new AlumnoData(conexion);
+        cd = new CursadaData(conexion);
+        
         cargarAlumnos();
         armarCabecera();
-      
- 
-        materiaData = new MateriaData(conexion);
-        listaMaterias = (ArrayList)materiaData.listarMaterias();
     }
     
     public void cargarAlumnos() {
-        List <Alumno> alumnos = alumnoData.listaDeAlumnos();
+        List <Alumno> alumnos = ad.listaDeAlumnos();
         
         for (Alumno a:alumnos){
             jcbAlumnos.addItem(a);
@@ -64,7 +62,7 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         columnas.add("ID");
         columnas.add("Nombre");
         columnas.add("Año");
-        
+
         for(Object it: columnas) {
             modelo.addColumn(it);
         }
@@ -279,16 +277,16 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int filaSelect = jtMaterias.getSelectedRow();
         
-        if (filaSelect !=-1) {
-            Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
-            
+        if (filaSelect !=-1) {            
             int id_materia = (Integer)modelo.getValueAt(filaSelect, 0);
             String nombreMateria = (String)modelo.getValueAt(filaSelect, 1);
             int anio = (Integer)modelo.getValueAt(filaSelect, 2);
             
             Materia mat = new Materia(id_materia, nombreMateria, anio);
-            Cursada cur = new Cursada(mat, a, 0, true);
-            CursadaData cd = new CursadaData(conexion);
+            Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
+            
+            Cursada cur = new Cursada(mat, a, -1, true);
+
             cd.guardarCursada(cur);
             borrarFilasTabla();
         }
@@ -302,9 +300,7 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
             Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
             
             int id_materia = (Integer)modelo.getValueAt(filaSelect, 0);
-           
             
-            CursadaData cd = new CursadaData(conexion);
             cd.borrarCursada(a.getId_alumno(), id_materia);
             borrarFilasTabla();
         }
