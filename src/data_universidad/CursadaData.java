@@ -108,32 +108,30 @@ public class CursadaData {
         return listaCursadas;
     }
         
-    public List<Cursada> obtenerCursadasXAlumno(int id_alumno){
+    public List<Cursada> obtenerCursadasXAlumno(int id){
+        Cursada ins=null;
         ArrayList<Cursada> cursadas = new ArrayList<>();
-        Cursada c;
+
         String query = "SELECT * FROM cursada WHERE cursada.id_alumno = ? AND activo = true";
         try {
             
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery();
-            ps.setInt(1,id_alumno);             // filtrar para un alumno
-            
+            ps.setInt(1,id); 
+            ResultSet rs = ps.executeQuery();            
             //Cursada cursada;
             while(rs.next()){
-                c = new Cursada();
-                
+                ins = new Cursada();
+                ins.setId_cursada(rs.getInt(1));
                 
                 Alumno a = buscarAlumno(rs.getInt("id_alumno"));
-                c.setAlumno(a);
-                
+                ins.setAlumno(a);
                 Materia m = buscarMateria(rs.getInt("id_materia"));
-                c.setMateria(m);
-                c.setNota(rs.getDouble("nota"));
-                c.setId_cursada(rs.getInt("id_cursada"));
-
-                cursadas.add(c);
+                ins.setMateria(m);
+                
+                ins.setNota(rs.getDouble("nota"));
+                cursadas.add(ins);
             }      
-            //ps.close();
+            ps.close();
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al crear la lista");
         }
@@ -150,12 +148,9 @@ public class CursadaData {
                     + "AND cursada.id_alumno = ? ";
 
         try {
-           
 
             PreparedStatement ps = conn.prepareStatement(query);
-
             ps.setInt(1, id_alumno);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -173,7 +168,6 @@ public class CursadaData {
             JOptionPane.showMessageDialog(null, "Error al cargar materias" + ex);
         }
         return listaMaterias;
-    
     }
     
     public List<Materia> obtenerMateriasNoCursadas(int id_alumno) {
@@ -187,12 +181,8 @@ public class CursadaData {
                     + "AND cursada.id_alumno = ?) ";
 
         try {
-         
-
             PreparedStatement ps = conn.prepareStatement(query);
-
             ps.setInt(1, id_alumno);
-
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -210,7 +200,6 @@ public class CursadaData {
             JOptionPane.showMessageDialog(null, "Error al obtener materias" + ex);
         }
         return listaMaterias;
-    
     }
     
     public List<Alumno> obtenerAlumnosXMateria(int id_materia) {
@@ -254,7 +243,6 @@ public class CursadaData {
             
             ps.setDouble(1, nota); 
             ps.setInt(2, id_cursada);
-            
             ps.executeUpdate();
             //if (ps.executeUpdate()>0){
                JOptionPane.showMessageDialog(null, "Nota Actualizada Correctamente");  

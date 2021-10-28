@@ -32,7 +32,6 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
 
     AlumnoData ad;
     CursadaData cd; 
-    MateriaData md;
     /**
      * Creates new form VistaCargarNotas
      */
@@ -40,22 +39,17 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         initComponents();
         
         conexion = new Conectar();
- 
         ad = new AlumnoData(conexion);
         cd = new CursadaData(conexion);
-        md = new MateriaData(conexion);
         
         armarCabeceraTabla();
         cargarAlumnos();
-        
-        materiaData = new MateriaData(conexion);
-        listaMaterias = (ArrayList)materiaData.listarMaterias();
     }
     
     public void cargarAlumnos() {
-        List <Alumno> alumnos = ad.listaDeAlumnos();
+        List <Alumno> lista = ad.listaDeAlumnos();
         
-        for(Alumno item:alumnos){
+        for(Alumno item:lista){
             jcbAlumno.addItem(item);
         }
     }
@@ -68,7 +62,6 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
         columnas.add("ID");
         columnas.add("Materia");
         columnas.add("Nota");
-        
         for (Object it: columnas) {
             modelo.addColumn(it);
         }
@@ -86,14 +79,12 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
     public void cargarDatos() {
         borrarFilasTabla();
         
-        CursadaData cd = new CursadaData(conexion);
+        Alumno seleccionado = (Alumno) jcbAlumno.getSelectedItem();
         
-        Alumno select = (Alumno) jcbAlumno.getSelectedItem();
-        
-        int id_alumno = select.getId_alumno();
+        //int id_alumno = seleccionado.getId_alumno();
         //listaMaterias = (ArrayList)cd.obtenerMateriasCursadas(select.getId_alumno());
         
-        List<Cursada> lista = cd.obtenerCursadasXAlumno(id_alumno);
+        List<Cursada> lista = cd.obtenerCursadasXAlumno(seleccionado.getId_alumno());
         for (Cursada c: lista){
             modelo.addRow(new Object[] {c.getId_cursada(), c.getMateria().getNombreMateria(), c.getNota()});
         }
