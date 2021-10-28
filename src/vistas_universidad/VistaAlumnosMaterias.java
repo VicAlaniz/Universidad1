@@ -35,6 +35,7 @@ public final class VistaAlumnosMaterias extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     public VistaAlumnosMaterias() {
         initComponents();
+        
         conexion = new Conectar();
         modelo = new DefaultTableModel();
         
