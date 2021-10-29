@@ -7,6 +7,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -127,6 +129,8 @@ public class AlumnoData {
             ps.setDate(3, Date.valueOf(alum.getFechaNac()));
             ps.setInt(4, alum.getLegajo());
             ps.setBoolean(5, alum.isActivo());
+            
+            ps.executeUpdate();
             
             if(ps.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null, "Alumno Actualizado Exitosamente");

@@ -234,6 +234,7 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         if(jtId.getText()!=null){
             String nombre=jtNombre.getText();
             String apellido=jtApellido.getText();
+            //Date.valueOf(jdFechaNac.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             LocalDate fechaNac=LocalDate.parse(jdFechaNac.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             int legajo=Integer.parseInt(jtLegajo.getText());
             boolean activo=chActivo.isEnabled();
@@ -264,7 +265,7 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             jtId.setText(alumno.getId_alumno()+"");
             jtNombre.setText(alumno.getNombre());
             jtApellido.setText(alumno.getApellido());
-            jdFechaNac.setDate(Date.valueOf(alumno.getFechaNac().toString()));
+            jdFechaNac.setDate(Date.valueOf(alumno.getFechaNac()));
             jtLegajo.setText(alumno.getLegajo()+"");
             chActivo.setSelected(alumno.isActivo());
         }else{
