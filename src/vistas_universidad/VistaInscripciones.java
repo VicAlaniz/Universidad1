@@ -278,6 +278,7 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
         int filaSelect = jtMaterias.getSelectedRow();
         
         if (filaSelect !=-1) {            
+            
             int id_materia = (Integer)modelo.getValueAt(filaSelect, 0);
             String nombreMateria = (String)modelo.getValueAt(filaSelect, 1);
             int anio = (Integer)modelo.getValueAt(filaSelect, 2);
