@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidad1.Alumno;
 import universidad1.Conectar;
@@ -263,33 +264,42 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
 
     private void jrbInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptaActionPerformed
         // TODO add your handling code here:
-        try {
+       /* try {
             setSelected(false);
         } catch (PropertyVetoException ex) {
             Logger.getLogger(VistaInscripciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        cargarDatosInscriptas();
+        }*/
+       jrbInscripta.setSelected(true);
+       jrbNoInscripta.setSelected(false);
+       jbInscribir.setEnabled(false);
+        
         jbAnular.setEnabled(true);
-        jbInscribir.setEnabled(false);
+        borrarFilasTabla();
+        cargarDatosInscriptas();
     }//GEN-LAST:event_jrbInscriptaActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         // TODO add your handling code here:
+        Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
         int filaSelect = jtMaterias.getSelectedRow();
         
-        if (filaSelect !=-1) {            
+        if (filaSelect !=-1) {
+        
+            int id_materia = (Integer)jtMaterias.getValueAt(filaSelect, 0);
+            String nombreMateria = (String)jtMaterias.getValueAt(filaSelect, 1);
+            int anio = (Integer)jtMaterias.getValueAt(filaSelect, 2);
+        
+            Materia mat = new Materia(); //(id_materia, nombreMateria, anio)
+            mat.setId_materia(id_materia);
+            mat.setNombreMateria(nombreMateria);
+            mat.setAnio(anio);
             
-            int id_materia = (Integer)modelo.getValueAt(filaSelect, 0);
-            String nombreMateria = (String)modelo.getValueAt(filaSelect, 1);
-            int anio = (Integer)modelo.getValueAt(filaSelect, 2);
-            
-            Materia mat = new Materia(id_materia, nombreMateria, anio);
-            Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
-            
-            Cursada cur = new Cursada(mat, a, -1, true);
+            Cursada cur = new Cursada(mat, a, 0);
 
             cd.guardarCursada(cur);
             borrarFilasTabla();
+        }else{
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado una materia.");
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
 

@@ -97,27 +97,28 @@ public class MateriaData {
     }
     
     public void actualizarMateria(Materia m){
-        String query = "UPDATE materias SET nombreMateria = ?, anio = ?, activo = ?, WHERE id_materia = ?";
+        String query = " UPDATE materias SET nombreMateria = ?, anio = ?, activo = ? WHERE id_materia = ? ";
         
          try {
-             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement ps = conn.prepareStatement(query);
              
-             ps.setInt(4, m.getId_materia());
+             
              ps.setString(1, m.getNombreMateria());
              ps.setInt(2, m.getAnio());
              ps.setBoolean(3, m.isActivo());
-             ResultSet rs=ps.getGeneratedKeys();
-             if (rs.next()){
-                 m.setId_materia(rs.getInt(1));
-               JOptionPane.showMessageDialog(null, "Materia actualizada correctamente");  
-             }
-             else {
-                 JOptionPane.showMessageDialog(null, "Materia no cargada en el registro");
-             }
-             ps.close();
-         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error al actualizar materia");
-         }
+             ps.setInt(4, m.getId_materia());
+             
+           ps.executeUpdate();
+            
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Materia Actualizado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al intentar actualizar materia");
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nMateria No Encontrada" + ex.getMessage());
+        }
     }
     
     public void borrarMateria(int id_materia){

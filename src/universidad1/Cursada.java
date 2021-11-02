@@ -35,9 +35,13 @@ public class Cursada {
         
     }
 
-    public Cursada(Materia mat, Alumno a, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cursada(Materia materia, Alumno alumno, double nota) {
+        this.materia = materia;
+        this.alumno = alumno;
+        this.nota = nota;
     }
+
+   
 
     public int getId_cursada() {
         return id_cursada;

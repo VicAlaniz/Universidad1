@@ -24,7 +24,7 @@ public class AlumnoData {
     }
     
     public void guardarAlumno(Alumno alum){
-        String query = "INSERT INTO alumnos(apellido, nombre, fechaNac, legajo, activo)VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO alumnos(apellido, nombre, fechaNac, legajo, activo) VALUES (?,?,?,?,?)";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

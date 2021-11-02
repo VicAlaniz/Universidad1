@@ -8,6 +8,7 @@ package universidad1;
 import data_universidad.AlumnoData;
 import data_universidad.CursadaData;
 import data_universidad.MateriaData;
+import java.time.LocalDate;
 
 /**
  *
@@ -47,18 +48,23 @@ public class Universidad1 {
 
         System.out.println("Materia guardada correctamente");
         
-        md.borrarMateria(1);
-        Alumno r = new Alumno(3, "Alaniz", "Rama", LocalDate.of(1982,04,25), 003, false);
-        r.setActivo(true);
-        ad.actualizarAlumno(r);*/
+        md.borrarMateria(1);*/
+        //Alumno r = new Alumno(3, "Alaniz", "Rama", LocalDate.of(1982,04,25), 003, false);
+        //r.setActivo(true);
+        //ad.actualizarAlumno(r);
         
-       Alumno p = ad.buscarAlumno(2);
-       Alumno r = ad.buscarAlumno(3);
-       Materia i = md.buscarMateria(3);
+       //Alumno p = ad.buscarAlumno(2);
+       //Alumno r = ad.buscarAlumno(3);
+       //Materia i = md.buscarMateria(3);
+       //Materia m = new Materia ("Biologia", 1, true);
+       //md.guardarMateria(m);
+       Materia m = new Materia(11, "Biologia", 1, true);
+       m.setActivo(false);
+       md.actualizarMateria(m);
         
         //Cursada cr = new Cursada(i, v, 10, true);
-        Cursada cr = new Cursada(i, p, 10, true);
-        Cursada c = new Cursada(i, r, 10, true);
+        //Cursada cr = new Cursada(i, p, 10, true);
+        //Cursada c = new Cursada(i, r, 10, true);
         
         //cd.guardarCursada(c);
         //cd.guardarCursada(cr);

@@ -33,13 +33,15 @@ public class CursadaData {
         ad = new AlumnoData(conn);
     }
     public void guardarCursada(Cursada c){
-        String query = "INSERT INTO cursada(id_materia, id_alumno, nota) VALUES (?, ?, ?)";
+        String query = "INSERT INTO cursada(id_materia, id_alumno, nota, activo) VALUES (?,?,?,?)";
     
         try {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getMateria().getId_materia());
             ps.setInt(2, c.getAlumno().getId_alumno());
             ps.setDouble(3, c.getNota());
+            ps.setBoolean(4, c.isActivo());
+            
             
             ps.executeUpdate();
             
@@ -52,7 +54,7 @@ public class CursadaData {
             ps.close();
         
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo efectuar la inscripción");
+            JOptionPane.showMessageDialog(null, "No se pudo efectuar la inscripción" + ex.getMessage());
         }
         
     }
