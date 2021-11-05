@@ -286,7 +286,7 @@ public class VistaInscripciones extends javax.swing.JInternalFrame {
             Materia mat = new Materia(id_materia, nombreMateria, anio);
             Alumno a = (Alumno) jcbAlumnos.getSelectedItem();
             
-            Cursada cur = new Cursada(mat, a, -1, true);
+            Cursada cur = new Cursada(mat, a, 0, true);
 
             cd.guardarCursada(cur);
             borrarFilasTabla();

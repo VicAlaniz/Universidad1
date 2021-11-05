@@ -7,6 +7,7 @@ package vistas_universidad;
 
 import data_universidad.AlumnoData;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -212,7 +213,11 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         
         String nombre=jtNombre.getText();
         String apellido=jtApellido.getText();
-        LocalDate fechaNac=LocalDate.parse(jdFechaNac.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = formato.format(jdFechaNac.getDate());
+        LocalDate fechaNac=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        
         int legajo=Integer.parseInt(jtLegajo.getText());
         boolean activo=chActivo.isEnabled();
         

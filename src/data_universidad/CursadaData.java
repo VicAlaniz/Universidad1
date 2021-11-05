@@ -80,7 +80,7 @@ public class CursadaData {
     
     public List<Cursada> obtenerInscripcion() {
          ArrayList<Cursada> listaCursadas = new ArrayList<>();
-         String query = "SELECT * FROM cursada WHERE cursada.id_cursada = ? activo = true";
+         String query = "SELECT * FROM cursada WHERE activo = true";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

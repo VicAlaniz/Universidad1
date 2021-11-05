@@ -57,11 +57,11 @@ public class Universidad1 {
        Materia i = md.buscarMateria(3);
         
         //Cursada cr = new Cursada(i, v, 10, true);
-        Cursada cr = new Cursada(i, p, 10, true);
-        Cursada c = new Cursada(i, r, 10, true);
+        Cursada cr1 = new Cursada(i, p, 10, true);
+        Cursada c1 = new Cursada(i, r, 10, true);
         
-        //cd.guardarCursada(c);
-        //cd.guardarCursada(cr);
+        cd.guardarCursada(c1);
+        //cd.guardarCursada(cr1);
         //cd.guardarCursada(cr);
         
         //System.out.println("Inscripcion realizada");
@@ -80,6 +80,8 @@ public class Universidad1 {
        //ad.buscarAlumno(1);
        //md.buscarMateria(1);
         //System.out.println("Materia");
+        
+        
 
     }
     
