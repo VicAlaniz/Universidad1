@@ -221,7 +221,7 @@ public class VistaCargarNotas extends javax.swing.JInternalFrame {
             Alumno a = (Alumno) jcbAlumno.getSelectedItem();
             
             int idInscripcion = (Integer) modelo.getValueAt(filaSelect, 0);
-            double nota = (Double)modelo.getValueAt(filaSelect, 2);
+            double nota = Double.parseDouble((String)modelo.getValueAt(filaSelect, 2));
             
             cd.actualizarNotas(idInscripcion, nota);
             borrarFilasTabla();
