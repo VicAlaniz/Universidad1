@@ -106,6 +106,12 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
+        jtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIdActionPerformed(evt);
+            }
+        });
+
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,14 +243,16 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
         if(jtId.getText()!=null){
+            int id_alumno=Integer.parseInt(jtId.getText());
             String nombre=jtNombre.getText();
             String apellido=jtApellido.getText();
-            //Date.valueOf(jdFechaNac.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            LocalDate fechaNac=LocalDate.parse(jdFechaNac.getDateFormatString(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formato.format(jdFechaNac.getDate());
+            LocalDate fechaNac=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             int legajo=Integer.parseInt(jtLegajo.getText());
             boolean activo=chActivo.isEnabled();
         
-            Alumno alumno = new Alumno(apellido, nombre, fechaNac, legajo, activo);
+            Alumno alumno = new Alumno(id_alumno, apellido, nombre, fechaNac, legajo, activo);
             alumnoData.actualizarAlumno(alumno);
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
@@ -277,6 +285,10 @@ public class VistaAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

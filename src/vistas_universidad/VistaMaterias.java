@@ -237,11 +237,12 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     private void jbActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizar1ActionPerformed
         // TODO add your handling code here:
           if(jtId.getText()!=null){
+            int id_materia = Integer.parseInt(jtId.getText());
             String nombreMateria = jtNombre.getText();
             int anio = Integer.parseInt(jtAnio.getText());
             boolean activo = jcActivo.isEnabled();
         
-            Materia materia = new Materia(nombreMateria, anio, activo); 
+            Materia materia = new Materia(id_materia, nombreMateria, anio, activo); 
             materiaData.actualizarMateria(materia);
         }
     }//GEN-LAST:event_jbActualizar1ActionPerformed
